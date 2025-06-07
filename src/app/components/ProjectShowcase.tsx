@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { toolMetadata } from "@/app/data/toolMetadata"; // Adjust the import path as necessary
 
 type ProjectImages = {
   src: string;
@@ -26,9 +27,9 @@ export default function ProjectShowcase({
   const [activeImage, setActiveImage] = useState(0);
 
   return (
-    <div className="max-w-4xl mx-auto my-10 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto my-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6">{title}</h2>
-      <div className="grid md:grid-cols-2 gap-8 items-start">
+      <div className="flex flex-col items-center">
         {/* Textual content */}
         <div>
           {description && (
@@ -38,11 +39,24 @@ export default function ProjectShowcase({
           {tools && tools.length > 0 && (
             <div className="mt-4">
               <h3 className="text-lg font-semibold mb-2">Tools Used:</h3>
-              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
-                {tools.map((tool, index) => (
-                  <li key={index}>{tool}</li>
-                ))}
-              </ul>
+              <div className="flex flex-wrap gap-3">
+            {tools.map((tool) => {
+                const meta = toolMetadata[tool];
+                return (
+                <div
+                    key={tool}
+                    className="flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium shadow-md border border-white/10"
+                    style={{
+                    backgroundColor: meta?.color ?? '#444',
+                    color: meta?.type === 'frontend' ? '#111' : '#fff',
+                    }}
+                >
+                    <span className="text-lg">{meta?.icon}</span>
+                    {tool}
+                </div>
+                );
+            })}
+            </div>
             </div>
           )}
 
@@ -61,7 +75,7 @@ export default function ProjectShowcase({
         </div>
 
         {/* Image section */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-start">
           {images.length > 1 && (
             <div className="flex gap-6 mb-6">
               {images.map((img, index) => (

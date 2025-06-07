@@ -104,21 +104,38 @@ export default function TimelineSteps() {
             style={{ opacity, scale }}
             className="h-screen sticky top-0 flex items-start justify-center pt-24 pointer-events-none"
           >
-            <div className="pointer-events-auto bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl shadow-xl p-8 w-[90%] max-w-xl text-center">
-              <h3 className="text-blue-600 text-xl font-bold">{item.year}</h3>
-              <h4 className="text-lg font-semibold mt-2">{item.title}</h4>
-              <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm">
-                {item.description}
-              </p>
-              {item.tools && (
-                <p className="text-xs mt-2 italic text-gray-400 dark:text-gray-500">
-                  Tools: {item.tools}
+            <div className="pointer-events-auto bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 rounded-2xl shadow-lg border border-gray-300 dark:border-neutral-700 w-[90%] max-w-[1200px] px-12 py-14 text-left space-y-4">
+                <div className="flex justify-between items-center">
+                    <h3 className="text-xl font-bold text-blue-600">{item.year}</h3>
+                    {item.tools && (
+                    <span className="text-xs italic text-gray-400 dark:text-gray-500">
+                        {item.tools}
+                    </span>
+                    )}
+                </div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{item.title}</h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    {item.description}
                 </p>
-              )}
-            </div>
+                </div>
           </motion.div>
         );
       })}
+      <motion.div
+        style={{
+            opacity: useTransform(scrollYProgress, [0.98, 1], [0, 1]),
+            scale: useTransform(scrollYProgress, [0.98, 1], [0.95, 1]),
+        }}
+        className="h-screen sticky top-0 flex items-center justify-center"
+        >
+        <div className="pointer-events-auto bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 rounded-2xl shadow-lg border border-gray-300 dark:border-neutral-700 w-[90%] max-w-[900px] px-8 py-12 text-center space-y-4">
+            <h3 className="text-2xl font-bold text-blue-600">Thank you for viewing my timeline!</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            I truly appreciate your time and interest in my journey. I hope it gave you a thoughtful glimpse into how I’ve grown and what I care about.
+            </p>
+            <p className="text-sm text-gray-400 dark:text-gray-500 italic">Let’s keep building something meaningful.</p>
+        </div>
+        </motion.div>
     </div>
   );
 }

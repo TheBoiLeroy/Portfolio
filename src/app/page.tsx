@@ -31,6 +31,8 @@ export default function HomePage() {
               🚀 2016 — Started learning Python<br />
               🎓 2025 — Graduated UCSC<br />
               🛠️ 9 years later I'm still coding and looking for opportunities<br />
+              always trying to stay on top of the latest tech trends and tools.<br/>
+              
             </p>
             <Link
               href="/timeline"
