@@ -4,53 +4,43 @@ import ProjectImageCarousel from "./components/ProjectImageCarousel";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen px-6 py-20 bg-white dark:bg-black text-black dark:text-white">
-      <section className="flex flex-col md:flex-row items-start gap-10 max-w-5xl mx-auto">
-        {/* 🖼️ Profile Picture */}
-        <div className="w-[300px] border border-gray-300 dark:border-gray-700 shadow-md self-start">
+    <main className="min-h-screen px-6 pt-32 pb-20 text-gray-800">
+      <section className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div className="space-y-6 order-2 md:order-1">
+          <h1 className="text-5xl font-bold leading-tight">Hi, I'm Ian.</h1>
+          <p className="text-lg">
+            I build full-stack applications and experiment with AI to create engaging digital experiences.
+            I'm always exploring new technologies and turning ideas into reality.
+          </p>
+          <div className="flex gap-4">
+            <Link href="/projects" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+              View Projects
+            </Link>
+            <Link href="/contact" className="px-4 py-2 border border-gray-700 rounded hover:bg-gray-100 transition">
+              Contact Me
+            </Link>
+          </div>
+        </div>
+        <div className="order-1 md:order-2 flex justify-center">
           <Image
             src="/webPP.jpg"
             alt="Profile Picture"
-            width={300}
-            height={300}
-            className="object-contain"
+            width={320}
+            height={320}
+            className="rounded-full shadow-lg object-cover"
           />
         </div>
+      </section>
 
-        {/* 🧑‍💻 Intro + Timeline + Carousel */}
-        <div>
-          <h1 className="text-3xl font-bold">Hi,</h1>
-          <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-xl">
-            I’m a recent Computer Science graduate from UC Santa Cruz with a passion for full-stack development, AI, and building tools that solve real-world problems. I’m a motivated, collaborative team player with strong communication skills in both English and Spanish.
-            My goal is to create impactful, user-centered solutions—and I’m always eager to learn, grow, and contribute meaningfully to the tech community.
-          </p>
-
-          {/* ✨ Timeline Preview */}
-          <div className="mt-6 text-sm text-gray-500 dark:text-gray-400 italic">
-            <p>
-              🚀 2016 — Started learning Python<br />
-              🎓 2025 — Graduated UCSC<br />
-              🛠️ 9 years later I'm still coding and looking for opportunities<br />
-              always trying to stay on top of the latest tech trends and tools.<br/>
-              
-            </p>
-            <Link
-              href="/timeline"
-              className="inline-block mt-4 text-blue-600 hover:underline font-medium"
-            >
-              View full timeline →
-            </Link>
-          </div>
-
-          {/* 📱 Project Image Carousel */}
-          <ProjectImageCarousel
-            images={[
-              { src: "/images/projectimgs/simLongin.png", alt: "App screen 1" },
-              { src: "/images/projectimgs/simBossDash.png", alt: "App screen 2" },
-              { src: "/images/projectimgs/simContractorView.png", alt: "App screen 3" },
-            ]}
-          />
-        </div>
+      <section className="mt-20">
+        <h2 className="text-2xl font-semibold mb-6">Currently Building</h2>
+        <ProjectImageCarousel
+          images={[
+            { src: "/images/projectimgs/simLongin.png", alt: "App screen 1" },
+            { src: "/images/projectimgs/simBossDash.png", alt: "App screen 2" },
+            { src: "/images/projectimgs/simContractorView.png", alt: "App screen 3" },
+          ]}
+        />
       </section>
     </main>
   );
