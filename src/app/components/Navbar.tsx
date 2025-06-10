@@ -15,7 +15,11 @@ export default function Navbar() {
 
   return (
     <nav className="w-full fixed top-0 left-0 bg-black text-white px-6 py-4 flex items-center justify-between z-50">
-      <h1 className="font-mono text-3xl font-bold">Ian Santos</h1>
+      <h1 className="text-4xl sm:text-5xl font-mono font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text">
+  Ian Santos
+</h1>
+
+
 
       <div className="flex items-center space-x-8">
         <ul className="flex items-center space-x-6 font-mono text-sm">

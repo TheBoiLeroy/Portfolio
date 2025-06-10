@@ -36,6 +36,6 @@ export const projects: Project[] = [
       { src: "/images/projectimgs/Brinqa_Herding_Cats-Poster1.jpg", alt: "BrinqaPoster" }
     ],
     tools: ["TypeScript", "SQLite", "Docker", "Slack API", "Jira API", "Bitbucket", "Axios", "Cron"],
-    linkToProject: "https://github.com/pomeloFellow/Paden-SlackBot",
+    linkToProject: "email for access",
   }
 ];

@@ -7,7 +7,6 @@ interface ProjectImageCarouselProps {
 export default function ProjectImageCarousel({ images }: ProjectImageCarouselProps) {
   return (
     <div className="mt-6 overflow-x-auto pb-2">
-        <h2 className="text-xl font-semibold mb-4">Current Project</h2>
       <div className="flex gap-4 w-max">
         {images.map((img, index) => (
           <Image
