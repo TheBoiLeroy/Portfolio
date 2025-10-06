@@ -8,12 +8,28 @@ function createBoard(size: number): Player[][] {
   return Array.from({ length: size }, () => Array(size).fill(null));
 }
 
+function growBoard(oldBoard: Player[][]): Player[][] {
+  const oldSize = oldBoard.length;
+  const newSize = oldSize + 2;
+  const newBoard = createBoard(newSize);
+
+  for (let i = 0; i < oldSize; i++) {
+    for (let j = 0; j < oldSize; j++) {
+      newBoard[i + 1][j + 1] = oldBoard[i][j]; // shift original board into center
+    }
+  }
+
+  return newBoard;
+}
+
 export default function GrowingTicTacToe() {
-  const [size, setSize] = useState(3);
-  const [winLength, setWinLength] = useState(3);
   const [board, setBoard] = useState(createBoard(3));
+  const [winLength, setWinLength] = useState(3);
   const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
   const [winner, setWinner] = useState<Player>(null);
+
+  const size = board.length;
+  const tileSize = Math.max(20, 60 - size); // Shrink cell size as board grows
 
   const handleClick = (row: number, col: number) => {
     if (board[row][col] || winner) return;
@@ -26,10 +42,10 @@ export default function GrowingTicTacToe() {
     if (checkWinner(newBoard, winLength)) {
       setWinner(currentPlayer);
     } else if (newBoard.flat().every(cell => cell !== null)) {
-      const newSize = size + 1;
-      setSize(newSize);
+      // Tie → grow the board and win length
+      const expandedBoard = growBoard(newBoard);
+      setBoard(expandedBoard);
       setWinLength(winLength + 1);
-      setBoard(createBoard(newSize));
     } else {
       setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
     }
@@ -65,27 +81,39 @@ export default function GrowingTicTacToe() {
 
   return (
     <main className="min-h-screen p-6 bg-white dark:bg-black text-black dark:text-white">
-      <h1 className="text-3xl font-bold mb-4">🧠 Growing Tic-Tac-Toe</h1>
-      <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        Connect {winLength} in a row to win. Board grows if there's a tie.
+      <h1 className="text-2xl font-bold mb-4">🧠 Growing Tic-Tac-Toe</h1>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        Connect {winLength} in a row to win. Board size: {size}×{size}
       </p>
       {winner && (
         <p className="text-lg font-semibold text-green-600 dark:text-green-400 mb-4">
           🎉 Player {winner} wins!
         </p>
       )}
-      <div className="grid" style={{ gridTemplateColumns: `repeat(${size}, 50px)` }}>
-        {board.map((row, i) =>
-          row.map((cell, j) => (
-            <button
-              key={`${i}-${j}`}
-              onClick={() => handleClick(i, j)}
-              className="w-12 h-12 border border-gray-400 dark:border-gray-600 text-xl font-bold flex items-center justify-center"
-            >
-              {cell}
-            </button>
-          ))
-        )}
+      <div className="overflow-auto border border-gray-300 dark:border-gray-700 max-w-full">
+        <div
+          className="grid"
+          style={{
+            gridTemplateColumns: `repeat(${size}, ${tileSize}px)`,
+          }}
+        >
+          {board.map((row, i) =>
+            row.map((cell, j) => (
+              <button
+                key={`${i}-${j}`}
+                onClick={() => handleClick(i, j)}
+                className="border border-gray-400 dark:border-gray-600 text-sm font-bold flex items-center justify-center"
+                style={{
+                  width: `${tileSize}px`,
+                  height: `${tileSize}px`,
+                  fontSize: `${tileSize * 0.5}px`,
+                }}
+              >
+                {cell}
+              </button>
+            ))
+          )}
+        </div>
       </div>
     </main>
   );
