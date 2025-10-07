@@ -74,9 +74,7 @@ export const projects: Project[] = [
       },
     ],
     images: [
-      { src: "/images/projectimgs/manet1.jpg", alt: "Manet1" },
-      { src: "/images/projectimgs/manet2.jpg", alt: "Manet2" },
-      { src: "/images/projectimgs/manet3.jpg", alt: "Manet3" },
+      { src: "/images/projectimgs/rasspi.JPG", alt: "Manet1" },
     ],
     tools: ["Raspberry Pi", "WiFi", "Linux", "Networking"],
   },
