@@ -89,6 +89,10 @@ export default function HomePage() {
                     })}
                 </div>
               )}
+
+
+              {activeTab === "In Progress..." && (
+                <p className="text-neutral-600 dark:text-neutral-400">Stay tuned for updates! 🚧</p>
               {activeTab === "What Im Working On" && (
                 <div>
                   <p className="text-neutral-600 dark:text-neutral-400">
