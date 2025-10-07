@@ -43,7 +43,7 @@ export default function TimelineSteps() {
     Frontend: ["HTML", "CSS", "React", "Next.js", "material-ui", "Tailwind CSS"],
     Backend: ["Django", "PostgreSQL", "SQLite", "Docker"],
     DevTools: ["Slack API", "Spotify API", "Jira", "BitBucket"],
-    AI_ML: ["TensorFlow", "PyTorch", "NLP", "AI", "ML", "LangGraph", "LangChain"],
+    AI_ML: ["TensorFlow", "PyTorch", "NLP", "AI", "ML", "LangGraph", "LangChain","MCP"],
     Concepts: ["Full-Stack Dev"],
   };
 

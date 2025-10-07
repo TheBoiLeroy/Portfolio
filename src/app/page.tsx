@@ -31,9 +31,9 @@ export default function HomePage() {
           <IntroSection />
           <div className="my-10 max-w-5xl mx-auto">
             <div className="rounded-lg bg-white dark:bg-neutral-900 shadow border border-gray-200 dark:border-neutral-700 p-6">
-              {/* Tab Buttons */}
+              {/* Tab Buttons */}        
               <div className="flex gap-3 mb-6">
-                {["Current Work", "Skills", "In Progress..."].map((tab) => (
+                {["Current Work", "Skills", "What Im Working On"].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -89,15 +89,25 @@ export default function HomePage() {
                     })}
                 </div>
               )}
-              <Link href="/minigames/growing_tictactoe">
-                <button className="px-4 py-2 mt-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                  Play Growing Tic-Tac-Toe
-                </button>
-              </Link>
-
-
-              {activeTab === "In Progress..." && (
-                <p className="text-neutral-600 dark:text-neutral-400">Stay tuned for updates! 🚧</p>
+              {activeTab === "What Im Working On" && (
+                <div>
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    My homelab
+                  </p>
+                  <ul className="list-disc pl-5">
+                    <li>TrueNAS server setup</li>
+                    <li>Repurposed an Old Dell 3050</li>
+                  </ul>
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    OpenManet (Raspberry Pi Cluster)
+                  </p>
+                  <ul className="list-disc pl-5">
+                    <li>Learning Kubernetes</li>
+                    <li>Experimenting with Docker</li>
+                    <li>Setting up a OpenManet cluster</li>
+                    <li>Follow my progress in my portfolio</li>
+                  </ul>
+                </div>
               )}
             </div>
           </div>
