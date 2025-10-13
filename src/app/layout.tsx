@@ -1,5 +1,4 @@
 // app/layout.tsx
-// @ts-ignore
 import "./globals.css";
 import Navbar from "@/app/components/Navbar"; // or "@/components/Navbar" if that's your alias
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";

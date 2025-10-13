@@ -1,7 +1,4 @@
 "use client";
-
-
-import dynamic from "next/dynamic";
 import ProjectShowcase from "../components/ProjectShowcase";
 import { projects } from "../data/projects";
 

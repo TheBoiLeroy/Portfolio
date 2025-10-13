@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const introText = `I’m a recent Computer Science graduate from UC Santa Cruz with a passion for full-stack development, AI, and building tools that solve real-world problems. I’m a motivated, collaborative team player with strong communication skills in both English and Spanish. My goal is to create impactful, user-centered solutions—and I’m always eager to learn, grow, and contribute meaningfully to the tech community.`;
+const introText = `I&apos;m a recent Computer Science graduate from UC Santa Cruz with a passion for full-stack development, AI, and building tools that solve real-world problems. I’m a motivated, collaborative team player with strong communication skills in both English and Spanish. My goal is to create impactful, user-centered solutions—and I’m always eager to learn, grow, and contribute meaningfully to the tech community.`;
 
 export default function IntroSection() {
   const [displayedText, setDisplayedText] = useState('');
@@ -31,7 +31,7 @@ export default function IntroSection() {
         <p>
           🚀 2016 — Started learning to code<br />
           🎓 2025 — Graduated UCSC<br />
-          🛠️ 9 years later I'm still coding and looking for opportunities<br />
+          🛠️ 9 years later I&apos;m still coding and looking for opportunities<br />
           always trying to stay on top of the latest tech trends and tools.<br />
         </p>
         <a

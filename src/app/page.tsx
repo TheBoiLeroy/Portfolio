@@ -142,7 +142,8 @@ export default function HomePage() {
                       <li>Learning Kubernetes</li>
                       <li>Experimenting with Docker</li>
                       <li>Setting up an OpenMANET cluster</li>
-                      <li>Follow my progress in my portfolio</li>
+                      <li>Follow my progress in my Projects</li>
+                      
                     </ul>
                   </div>
                 </div>
