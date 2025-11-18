@@ -3,7 +3,7 @@ export default function AboutPage() {
     <main className="p-10 max-w-3xl mx-auto">
       <h1 className="text-4xl font-bold mb-6">About Me</h1>
       <p className="text-lg text-gray-700 dark:text-gray-300">
-        Im Ian, a developer with a passion for AI, clean design, and building meaningful tech. I&apos;ve worked on apps ranging from automation tools to full-stack platforms.
+        I&apos;m Ian, a developer with a passion for AI, clean design, and building meaningful tech. I&apos;ve worked on apps ranging from automation tools to full-stack platforms.
       </p>
     </main>
   );

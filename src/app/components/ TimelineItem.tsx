@@ -1,5 +1,3 @@
-import { title } from "process";
-
 // data/timeline.ts
 export const timelineData = [
   {
