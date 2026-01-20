@@ -7,6 +7,11 @@ import {
   FaCss3Alt,
   FaPython,
   FaClock,
+  FaServer,
+  FaHdd,
+  FaNetworkWired,
+  FaWifi,
+
 } from 'react-icons/fa';
 import {
   SiTailwindcss,
@@ -27,11 +32,15 @@ import {
   SiJira,
   SiBitbucket,
   SiAxios,
+  SiLinux,
+  SiRaspberrypi,
+  SiWii,
+  SiZdf,
 } from 'react-icons/si';
 
 export const toolMetadata: Record<
   string,
-  { type: 'frontend' | 'backend'; color: string; icon: ReactElement }
+  { type: 'frontend' | 'backend' | 'infra' | 'hardware'; color: string; icon: ReactElement }
 > = {
   // Frontend
   React: {
@@ -161,4 +170,52 @@ export const toolMetadata: Record<
     color: '#555555',
     icon: <FaClock />, // fallback icon for Cron
   },
+  // Infrastructure / Systems
+Linux: {
+  type: "infra",
+  color: "#FCC624",
+  icon: <SiLinux />,
+},
+
+FreeNAS: {
+  type: "infra",
+  color: "#00A3E0",
+  icon: <FaServer />,
+},
+
+ZFS: {
+  type: "infra",
+  color: "#2E8BC0",
+  icon: <SiZdf />,
+},
+
+RAID: {
+  type: "infra",
+  color: "#6B7280",
+  icon: <FaHdd />,
+},
+
+Samba: {
+  type: "infra",
+  color: "#6B4FBB",
+  icon: <FaNetworkWired />,
+},
+
+Networking: {
+  type: "infra",
+  color: "#0EA5E9",
+  icon: <FaNetworkWired />,
+},
+
+// Hardware
+"Raspberry Pi": {
+  type: "hardware",
+  color: "#C51A4A",
+  icon: <SiRaspberrypi />,
+},
+WiFi: {
+  type: "hardware",
+  color: "#2563EB",
+  icon: <FaWifi />,
+},
 };
