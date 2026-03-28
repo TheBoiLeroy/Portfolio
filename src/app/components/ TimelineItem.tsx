@@ -45,17 +45,20 @@ export const timelineData = [
     tools: "Django, PostgreSQL, React, Spotify API"
     },
     {
-        year: "2024",  
-        title: "Capstone Project: chatbot for BRINQA",
-        description: "developed a chatbot for BRINQA, to provide the company with a tool to track team members progress and control the flow of stand up meetings.",
-        tools: "Slack API, Jira, BitBucket, SQLite, Docker, JavaScript, TypeScript"
-    },
-    {
-        year:"2025",
-        title: "Graduated and Unemployed",
-        description: "Graduated from the University of California Santa Cruz with a degree in Computer Science. Curently seeking opportunities in software development. Im not giving up on learning and improving my skills.\ncurrently wokring on multiple personal projects including a mobile app for investers to be able to executer trades on the go by simply sending a text message to a bot. or speaking to an AI bot.",
-        tools: "C++, Python, JavaScript, TypeScript, React, Django, PostgreSQL, SQLite, Docker, SQlite, NLP, AI, Machine Learning"
-    },
+        year: "2024",
+        events: [
+          {
+            title: "Circle Jam",
+            description: "Built an interactive music application... (your description here)",
+            tools: "Next.js, Tailwind CSS, TypeScript"
+          },
+          {
+            title: "Brinqa",
+            description: "Developed enterprise cybersecurity risk management solutions...",
+            tools: "React, Node.js, Python, PostgreSQL"
+          }
+        ]
+      },
     {
         year: "2025",
         title: "What I want to do next",
