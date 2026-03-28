@@ -11,6 +11,20 @@ import {
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 
+// Add these interfaces near the top of your file
+export interface TimelineEvent {
+  title: string;
+  description: string;
+  tools?: string;
+}
+
+export interface TimelineStepData {
+  year: string | number;
+  title?: string;
+  description?: string;
+  tools?: string;
+  events?: TimelineEvent[];
+}
 // --- Configuration ---
 const TOOL_ICONS: Record<string, JSX.Element> = {
   Python: <SiPython />, Java: <FaJava />, "C++": <SiCplusplus />, HTML: <SiHtml5 />, CSS: <SiCss3 />,
@@ -39,14 +53,14 @@ export default function InteractiveTimeline() {
   };
 
   // 1. Updated tool unlocker to support nested split cards
-  const unlockedTools = useMemo(() => {
+const unlockedTools = useMemo(() => {
     const seen = new Set<string>();
-    timelineData.slice(0, activeIndex + 1).forEach((step: any) => {
-      // Standard layout
+    // Fixed: step: TimelineStepData instead of step: any
+    timelineData.slice(0, activeIndex + 1).forEach((step: TimelineStepData) => {
       if (step.tools) step.tools.split(/,\s*/).forEach((t: string) => seen.add(t.trim()));
-      // Split card layout
       if (step.events) {
-        step.events.forEach((ev: any) => {
+        // Fixed: ev: TimelineEvent instead of ev: any
+        step.events.forEach((ev: TimelineEvent) => {
           if (ev.tools) ev.tools.split(/,\s*/).forEach((t: string) => seen.add(t.trim()));
         });
       }
@@ -54,7 +68,7 @@ export default function InteractiveTimeline() {
     return seen;
   }, [activeIndex]);
 
-  const activeStep: any = timelineData[activeIndex];
+  const activeStep = timelineData[activeIndex] as TimelineStepData;
 
   const variants = {
     enter: (direction: number) => ({ y: direction > 0 ? 50 : -50, opacity: 0, scale: 0.95 }),
@@ -75,7 +89,8 @@ export default function InteractiveTimeline() {
           <ToolBelt activeTools={unlockedTools} isMobile={false} />
         </div>
 
-        <div className="relative w-full max-w-4xl md:h-[500px] flex items-center justify-center perspective-[1000px]">
+        {/* Added h-[400px] and a bit of top margin (mt-8) so it clears the header */}
+        <div className="relative w-full max-w-4xl h-[400px] md:h-[500px] mt-8 md:mt-0 flex items-center justify-center perspective-[1000px]">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={activeIndex}
@@ -95,7 +110,7 @@ export default function InteractiveTimeline() {
               {activeStep.events ? (
                 // --- SPLIT CARD LAYOUT ---
                 <div className="flex flex-col md:flex-row gap-8 w-full h-full relative z-10 pt-10 md:pt-0">
-                  {activeStep.events.map((ev: any, idx: number) => (
+                 {activeStep.events.map((ev: TimelineEvent, idx: number) => (
                     <div key={idx} className="flex-1 flex flex-col h-[200px] md:h-full border-b md:border-b-0 md:border-r border-zinc-800/50 pb-6 md:pb-0 md:pr-8 last:border-0 last:pr-0 last:pb-0">
                       <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{ev.title}</h3>
                       <p className="text-[#c3c5d8] text-sm md:text-base flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
@@ -147,7 +162,7 @@ export default function InteractiveTimeline() {
 }
 
 // --- iOS Style Wheel Component ---
-function YearWheel({ items, activeIndex, onChange }: { items: any[], activeIndex: number, onChange: (idx: number) => void }) {
+function YearWheel({ items, activeIndex, onChange }: { items: TimelineStepData[], activeIndex: number, onChange: (idx: number) => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const ITEM_HEIGHT = 48; // maps to h-12
 
@@ -228,8 +243,9 @@ function ToolBelt({ activeTools, isMobile }: { activeTools: Set<string>, isMobil
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className="fixed top-4 right-4 z-50 bg-[#1c1b1b] border border-zinc-800 text-white p-3 rounded-xl shadow-lg">
-        <span className="material-symbols-outlined text-[#2962ff]">terminal</span>
+      {/* Moved to bottom-32 right-6, made it circular, and gave it the accent color */}
+      <button onClick={() => setIsOpen(true)} className="fixed bottom-32 right-6 z-50 bg-[#2962ff] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(41,98,255,0.4)] active:scale-95 transition-transform">
+        <span className="material-symbols-outlined">terminal</span>
       </button>
 
       <AnimatePresence>

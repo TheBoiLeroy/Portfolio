@@ -31,7 +31,7 @@ export default function HomePage() {
     ],
   };
 
-  // Build a unique, filtered list of tools that exist in toolMetadata
+  // Build a unique, filtered list of tools
   const tools: string[] = Array.from(
     new Set(
       timelineData.flatMap((item) =>
@@ -43,34 +43,34 @@ export default function HomePage() {
   ).filter((tool) => Boolean(toolMetadata[tool]));
 
   return (
-    <main className="min-h-screen px-6 py-20 bg-white dark:bg-black text-black dark:text-white">
-      <section className="flex flex-col md:flex-row items-start gap-10 max-w-5xl mx-auto">
+    <main className="min-h-screen px-4 sm:px-6 py-12 md:py-20 bg-white dark:bg-black text-black dark:text-white overflow-x-hidden">
+      <section className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-10 max-w-5xl mx-auto">
         
-        {/* 🖼️ Profile Picture */}
-        <div className="w-[300px] border border-gray-300 dark:border-gray-700 shadow-md self-start">
+        {/* 🖼️ Profile Picture - Fixed for mobile scaling & centering */}
+        <div className="w-full max-w-[300px] mx-auto md:mx-0 border border-gray-300 dark:border-gray-700 shadow-md shrink-0">
           <Image
             src="/webPP.jpg"
             alt="Profile picture"
             width={300}
             height={300}
             priority
-            className="object-contain"
+            className="w-full h-auto object-contain block"
           />
         </div>
 
-        {/* 🧑‍💻 Intro + Timeline + Tabs */}
-        <div className="flex-1">
+        {/* 🧑‍💻 Intro + Timeline + Tabs - Added min-w-0 to prevent flex overflow */}
+        <div className="flex-1 w-full min-w-0">
           <IntroSection />
 
-          <div className="my-10 max-w-5xl mx-auto">
-            <div className="rounded-lg bg-white dark:bg-neutral-900 shadow border border-gray-200 dark:border-neutral-700 p-6">
+          <div className="my-10 w-full">
+            <div className="rounded-lg bg-white dark:bg-neutral-900 shadow border border-gray-200 dark:border-neutral-700 p-4 sm:p-6">
               
-              {/* Header: Tabs + Landing Page Link */}
-              <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              {/* Header: Tabs - Added flex-wrap for mobile */}
+              <div className="mb-6">
                 <div
                   role="tablist"
                   aria-label="Profile sections"
-                  className="flex gap-3"
+                  className="flex flex-wrap gap-2 sm:gap-3"
                   id={tablistId}
                 >
                   {TABS.map((tab) => {
@@ -82,7 +82,7 @@ export default function HomePage() {
                         aria-selected={selected}
                         aria-controls={`panel-${tab.replace(/\s+/g, "-")}`}
                         onClick={() => setActiveTab(tab)}
-                        className={`px-4 py-2 text-sm font-medium rounded-md transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 dark:focus:ring-neutral-600 ${
+                        className={`px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 dark:focus:ring-neutral-600 ${
                           selected
                             ? "bg-black text-white dark:bg-white dark:text-black"
                             : "bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-700"
@@ -105,46 +105,50 @@ export default function HomePage() {
                   aria-labelledby={tablistId}
                   className="space-y-4"
                 >
-                  {/* Version Toggle */}
-                  <div className="flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 p-2 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                    <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 ml-2">
-                      Project Version: <span className="text-blue-500">{version}</span>
-                    </span>
-                    <div className="flex gap-1">
-                      <button
-                        onClick={() => setVersion("v1")}
-                        className={`px-3 py-1 text-xs font-semibold rounded transition ${
-                          version === "v1" 
-                            ? "bg-white dark:bg-neutral-700 shadow-sm text-black dark:text-white" 
-                            : "text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200"
-                        }`}
-                      >
-                        V1
-                      </button>
-                      <button
-                        onClick={() => setVersion("v2")}
-                        className={`px-3 py-1 text-xs font-semibold rounded transition ${
-                          version === "v2" 
-                            ? "bg-white dark:bg-neutral-700 shadow-sm text-black dark:text-white" 
-                            : "text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200"
-                        }`}
-                      >
-                        V2
-                      </button>
-                       {/* Navigation to /landingpages */}
+                  {/* Version Toggle - Stacked on mobile, row on tablet/desktop */}
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-neutral-50 dark:bg-neutral-800/50 p-3 rounded-lg border border-neutral-200 dark:border-neutral-700">
+                    
+                    <div className="flex items-center justify-between w-full sm:w-auto">
+                      <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 mr-4">
+                        Version: <span className="text-blue-500">{version}</span>
+                      </span>
+                      <div className="flex gap-1 bg-neutral-200 dark:bg-neutral-900 p-1 rounded-md">
+                        <button
+                          onClick={() => setVersion("v1")}
+                          className={`px-3 py-1 text-xs font-semibold rounded transition ${
+                            version === "v1" 
+                              ? "bg-white dark:bg-neutral-700 shadow-sm text-black dark:text-white" 
+                              : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+                          }`}
+                        >
+                          V1
+                        </button>
+                        <button
+                          onClick={() => setVersion("v2")}
+                          className={`px-3 py-1 text-xs font-semibold rounded transition ${
+                            version === "v2" 
+                              ? "bg-white dark:bg-neutral-700 shadow-sm text-black dark:text-white" 
+                              : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+                          }`}
+                        >
+                          V2
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Navigation to /landingpages */}
                     <Link
                       href="/landingpages"
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-bold text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-all active:scale-95"
+                      className="w-full sm:w-auto flex justify-center items-center gap-2 px-4 py-2 text-sm font-bold text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-all active:scale-95"
                     >
                       View Landing Pages
                       <span>→</span>
                     </Link>
-                    </div>
                   </div>
 
                   <div className="rounded-md overflow-hidden border dark:border-neutral-800">
                     <ProjectImageCarousel
-                      key={version} // Ensures carousel resets when version changes
+                      key={version}
                       images={projectImages[version]}
                     />
                   </div>
@@ -157,7 +161,7 @@ export default function HomePage() {
                   id="panel-Skills"
                   role="tabpanel"
                   aria-labelledby={tablistId}
-                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4"
                 >
                   {tools.map((tool) => {
                     const meta = toolMetadata[tool];
@@ -166,13 +170,13 @@ export default function HomePage() {
                     return (
                       <div
                         key={tool}
-                        className="flex items-center gap-2 border rounded-md p-2 text-sm dark:border-neutral-700 transition hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                        className="flex items-center gap-2 border rounded-md p-2 text-xs sm:text-sm dark:border-neutral-700 transition hover:bg-neutral-50 dark:hover:bg-neutral-800"
                         style={{ borderColor: color }}
                       >
-                        <span className="text-lg" style={{ color }}>
+                        <span className="text-base sm:text-lg" style={{ color }}>
                           {icon}
                         </span>
-                        <span className="text-neutral-800 dark:text-neutral-100">{tool}</span>
+                        <span className="text-neutral-800 dark:text-neutral-100 truncate">{tool}</span>
                       </div>
                     );
                   })}
@@ -185,7 +189,7 @@ export default function HomePage() {
                   id="panel-What-I'm-Working-On"
                   role="tabpanel"
                   aria-labelledby={tablistId}
-                  className="space-y-6"
+                  className="space-y-4 sm:space-y-6"
                 >
                   <div className="bg-neutral-50 dark:bg-neutral-800/30 p-4 rounded-lg">
                     <p className="text-neutral-600 dark:text-neutral-300 font-bold mb-2">My Homelab</p>
@@ -208,7 +212,6 @@ export default function HomePage() {
                   </div>
                 </div>
               )}
-              {/* end panels */}
             </div>
           </div>
         </div>

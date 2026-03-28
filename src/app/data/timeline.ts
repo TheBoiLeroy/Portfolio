@@ -55,7 +55,7 @@ export const timelineData = [
     tools: "Slack API, Jira, BitBucket, SQLite, Docker, JavaScript, TypeScript",
   },
   {
-    year: "2025",
+    year: "2024",
     title: "Graduated and Unemployed",
     description:
       "Graduated UCSC CS. Currently building personal projects like a mobile trading assistant. Not giving up.",
