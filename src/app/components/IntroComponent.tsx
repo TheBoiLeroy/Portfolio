@@ -30,8 +30,8 @@ export default function IntroSection() {
       <div className="mt-6 text-sm text-gray-500 dark:text-gray-400 italic">
         <p>
           🚀 2016 — Started learning to code<br />
-          🎓 2025 — Graduated UCSC<br />
-          🛠️ 9 years later I&apos;m still coding and looking for opportunities<br />
+          🎓 2024 — Graduated UCSC<br />
+          🛠️ 10 years later I&apos;m still coding and looking for opportunities<br />
           always trying to stay on top of the latest tech trends and tools.<br />
         </p>
         <a
