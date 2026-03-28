@@ -34,7 +34,6 @@ import {
   SiAxios,
   SiLinux,
   SiRaspberrypi,
-  SiWii,
   SiZdf,
 } from 'react-icons/si';
 
