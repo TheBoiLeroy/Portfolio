@@ -27,7 +27,7 @@ export default function HomePage() {
     v2: [
       { src: "/images/projectimgs/v2/Login.png", alt: "V2 Login Screen" },
       { src: "/images/projectimgs/v2/BossDash.png", alt: "V2 Boss Dashboard" },
-      { src: "/images/projectimgs/v2/Clockin.png", alt: "V2 Contractor View" },
+      { src: "/images/projectimgs/v2/ClockIn.png", alt: "V2 Contractor View" },
     ],
   };
 
