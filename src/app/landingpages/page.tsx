@@ -1,22 +1,40 @@
+'use client'; // Required for Next.js 13+ app directory
+
 import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 
 export default function ContractorWorks() {
+  // Using your previous Formspree ID: xnjopyyp
+  const [state, handleSubmit] = useForm("xnjopyyp");
+
   return (
     <div className="min-h-screen bg-[#131313] text-[#c3c5d8] font-sans selection:bg-[#2962ff] selection:text-white">
 
-      {/* TopNavBar Component */}
-      <header className="fixed top-0 w-full z-50 bg-[#1C1B1B] font-['Manrope'] font-bold tracking-tight border-b border-zinc-800/50">
-        <nav className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-          <div className="text-xl font-black text-white tracking-tighter">Contractor Works</div>
-          <div className="hidden md:flex items-center gap-8">
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="px-6 py-2 rounded-md bg-[#2962ff] text-white active:scale-95 duration-200 transition-all text-sm font-bold">
-              Login
-            </button>
-          </div>
-        </nav>
-      </header>
+  {/* TopNavBar Component */}
+        <header className="fixed top-0 w-full z-50 bg-[#1C1B1B] font-['Manrope'] font-bold tracking-tight border-b border-zinc-800/50">
+          <nav className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <div className="flex items-center gap-3">
+              {/* Logo added here */}
+              <img 
+                src="/images/projectimgs/logos/logo_ios.png"
+                alt="Contractor Works Logo" 
+                className="w-18 h-18 rounded-xl object-contain"
+              />
+              <div className="text-xl font-black text-white tracking-tighter">
+                Contractor Works
+              </div>
+            </div>
+            
+            <div className="hidden md:flex items-center gap-8">
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <button className="px-6 py-2 rounded-md bg-[#2962ff] text-white active:scale-95 duration-200 transition-all text-sm font-bold">
+                Login
+              </button>
+            </div>
+          </nav>
+        </header>
 
       <main className="pt-24">
         {/* Hero Section */}
@@ -31,13 +49,40 @@ export default function ContractorWorks() {
             <p className="text-lg md:text-xl text-[#c3c5d8] max-w-2xl mx-auto leading-relaxed">
               Streamline contractor management, job assignments, and payments with professional-grade precision. Engineered for the high-stakes site.
             </p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 pt-4">
-              <button className="w-full md:w-auto px-8 py-4 bg-[#2962ff] text-white rounded-lg font-bold text-lg hover:brightness-110 transition-all active:scale-95">
-                Get Started Now
-              </button>
-              <button className="w-full md:w-auto px-8 py-4 border border-[#434656] text-white rounded-lg font-bold text-lg hover:bg-[#1c1b1b] transition-all">
-                View Demo
-              </button>
+
+            {/* UPDATED: Join Testing Submission Section */}
+            <div className="max-w-md mx-auto pt-6">
+              {state.succeeded ? (
+                <div className="p-4 bg-[#00e47522] border border-[#00e475] rounded-lg text-[#00e475] font-bold animate-pulse">
+                  ✓ You've been added to the testing list!
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-2">
+                    <input
+                      id="email"
+                      type="email" 
+                      name="email"
+                      placeholder="Enter your email to join testing"
+                      required
+                      className="w-full md:w-80 px-6 py-4 bg-[#1c1b1b] border border-[#434656] rounded-lg text-white focus:outline-none focus:border-[#2962ff] transition-all"
+                    />
+                    <button 
+                      type="submit" 
+                      disabled={state.submitting}
+                      className="w-full md:w-auto px-8 py-4 bg-[#2962ff] text-white rounded-lg font-bold text-lg hover:brightness-110 transition-all active:scale-95 disabled:opacity-50"
+                    >
+                      {state.submitting ? 'Sending...' : 'Join Testing'}
+                    </button>
+                  </div>
+                  <ValidationError 
+                    prefix="Email" 
+                    field="email"
+                    errors={state.errors}
+                    className="text-red-500 text-sm font-bold"
+                  />
+                </form>
+              )}
             </div>
           </div>
         </section>
@@ -76,7 +121,7 @@ export default function ContractorWorks() {
                 <span className="material-symbols-outlined text-[#00e475]">payments</span>
                 <span className="text-xs font-bold tracking-[0.1em] text-[#00e475] uppercase">LEDGER</span>
               </div>
-              <h3 className="font-['Manrope'] text-3xl text-white mb-4">Instant Liquidity</h3>
+              <h3 className="font-['Manrope'] text-3xl text-white mb-4">Know Your Liquidity</h3>
               <p className="text-[#c3c5d8] mb-8">One-click reconciliation and instant payouts for field contractors.</p>
               <div className="space-y-4">
                 {[
@@ -93,30 +138,13 @@ export default function ContractorWorks() {
             </div>
           </div>
         </section>
-
-        {/* Social Proof - Fixed Quote marks here */}
-        <section className="py-32 relative overflow-hidden">
-          <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <span className="material-symbols-outlined text-[#2962ff] text-6xl mb-8 opacity-50">format_quote</span>
-            <blockquote className="font-['Manrope'] text-3xl md:text-4xl text-white italic leading-snug mb-8">
-              &ldquo;Contractor Works isn&apos;t just a tool; it&apos;s our central nervous system. We scaled from 5 to 22 active job sites in six months without adding a single administrative hire.&rdquo;
-            </blockquote>
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-[#201f1f]"></div>
-              <div className="text-left">
-                <div className="font-['Manrope'] text-white font-bold">Marcus Vanguard</div>
-                <div className="text-xs text-[#c3c5d8] uppercase tracking-widest">Senior Project Manager, Apex Build Group</div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="bg-[#131313] w-full py-12 border-t border-zinc-800/50">
         <div className="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-6 text-sm tracking-wide">
           <div className="flex flex-col gap-2">
             <div className="text-lg font-bold text-white">Contractor Works</div>
-            <p className="text-zinc-500">© 2024 Contractor Works Management. Built for the high-stakes site.</p>
+            <p className="text-zinc-500">© 2026 Contractor Works Management. Built for the high-stakes site.</p>
           </div>
         </div>
       </footer>
