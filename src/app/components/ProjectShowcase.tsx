@@ -3,8 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import type { Project } from "@/app/data/projects";
 import { toolMetadata } from "@/app/data/toolMetadata";
+import { MdArrowForward } from "react-icons/md";
 
 type ProjectShowcaseProps = Project;
 
@@ -19,130 +21,142 @@ export default function ProjectShowcase({
   const [activeImage, setActiveImage] = useState(0);
 
   return (
-    <div className="max-w-4xl mx-auto my-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6">{title}</h2>
+    // Changed to min-h-[100dvh] and removed snap-always so it scrolls naturally if tall
+    <section className="w-full min-h-[100dvh] snap-start flex items-center justify-center py-12 px-4 md:px-8 shrink-0 relative">
+      
+      {/* Removed strict height limits so the box grows naturally with the content */}
+      <div className="w-full max-w-7xl bg-[#1c1b1b] border border-zinc-800/80 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col lg:flex-row">
+        
+        {/* --- LEFT PANE --- */}
+        {/* Removed overflow-y-auto and scrollbar-none */}
+        <div className="w-full lg:w-[45%] p-8 md:p-12 flex flex-col border-b lg:border-b-0 lg:border-r border-zinc-800/80 relative">
+          
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#2962ff]/5 to-transparent pointer-events-none"></div>
 
-      {/* Keep overall layout centered */}
-      <div className="flex flex-col items-center gap-8">
+          <div className="relative z-10 flex-1">
+            <h2 className="text-3xl md:text-5xl font-black text-white font-['Manrope'] mb-6 tracking-tight">
+              {title}
+            </h2>
 
-        {/* TEXT / META SECTION — forced left aligned */}
-        <div className="w-full self-start">
-          {description && (
-            <p className="text-gray-700 dark:text-gray-300 mb-4">
-              {description}
-            </p>
-          )}
+            {description && (
+              <p className="text-[#c3c5d8] md:text-lg leading-relaxed mb-8">
+                {description}
+              </p>
+            )}
 
-          {tdl?.length ? (
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold mb-2">To-do</h3>
-              <ul className="space-y-2">
-                {tdl.map((raw, i) => {
-                  const checked = raw.trim().startsWith("[x]");
-                  const text = raw.replace(/^\[(x| )\]\s*/i, "");
-                  return (
-                    <li
-                      key={i}
-                      className="flex items-start gap-2 text-gray-700 dark:text-gray-300"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        readOnly
-                        className="mt-1"
-                      />
-                      <span>{text}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ) : null}
-
-          {tools?.length ? (
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold mb-2">Tools Used:</h3>
-              <div className="flex flex-wrap gap-3 justify-start">
-                {tools.map((tool) => {
-                  const meta = toolMetadata[tool];
-                  return (
-                    <div
-                      key={tool}
-                      className="flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium
-                                 border border-white/10 shadow-sm"
-                      style={{
-                        backgroundColor: meta?.color ?? "#444",
-                        color: meta?.type === "frontend" ? "#111" : "#fff",
-                      }}
-                    >
-                      <span className="text-lg">{meta?.icon}</span>
-                      {tool}
-                    </div>
-                  );
-                })}
+            {tools?.length ? (
+              <div className="mb-10">
+                <h3 className="text-[10px] font-bold tracking-[0.2em] text-zinc-500 uppercase mb-4">
+                  Tech Stack
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {tools.map((tool) => {
+                    const meta = toolMetadata[tool];
+                    const color = meta?.color ?? "#2962ff";
+                    return (
+                      <div
+                        key={tool}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900/50 rounded-lg text-xs font-bold uppercase tracking-widest border"
+                        style={{ borderColor: `${color}33`, color: color }}
+                      >
+                        <span className="text-base">{meta?.icon}</span>
+                        {tool}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          ) : null}
+            ) : null}
+
+            {tdl?.length ? (
+              <div className="mb-10">
+                <h3 className="text-[10px] font-bold tracking-[0.2em] text-zinc-500 uppercase mb-4">
+                  Development Roadmap
+                </h3>
+                <ul className="space-y-3">
+                  {tdl.map((raw, i) => {
+                    const checked = raw.trim().startsWith("[x]");
+                    const text = raw.replace(/^\[(x| )\]\s*/i, "");
+                    return (
+                      <li key={i} className="flex items-start gap-3 group">
+                        <div className={`mt-0.5 shrink-0 flex items-center justify-center w-5 h-5 rounded border transition-colors ${
+                          checked ? "bg-[#2962ff] border-[#2962ff] text-white" : "bg-zinc-900 border-zinc-700 text-transparent"
+                        }`}>
+                          <span className="material-symbols-outlined text-[14px] font-bold">check</span>
+                        </div>
+                        <span className={`text-sm md:text-base leading-snug transition-colors ${
+                          checked ? "text-zinc-500 line-through decoration-zinc-700" : "text-[#c3c5d8]"
+                        }`}>
+                          {text}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null}
+          </div>
 
           {linkToProject && (
-            <div className="mt-6">
+            <div className="mt-8 relative z-10 shrink-0">
               <Link
                 href={linkToProject}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-4 py-2 bg-blue-600 text-white rounded
-                           hover:bg-blue-700 transition"
+                className="group flex items-center justify-between w-full px-6 py-4 bg-[#2962ff] text-white font-bold rounded-xl hover:bg-blue-600 transition-all active:scale-[0.98]"
               >
-                Visit Project →
-              </Link>
+              <MdArrowForward className="text-2xl group-hover:translate-x-1 transition-transform" />
+                            </Link>
             </div>
           )}
         </div>
 
-        {/* IMAGE SECTION — stays centered */}
-        <div className="flex flex-col items-start">
+        {/* --- RIGHT PANE --- */}
+        {/* Let this pane naturally stretch to match the height of the left pane */}
+        <div className="w-full lg:w-[55%] min-h-[400px] lg:min-h-0 bg-[#131313] p-6 md:p-12 flex flex-col items-center justify-center relative">
+          
+          <div className="relative w-full max-w-[500px] flex-1 flex items-center justify-center mb-6">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeImage}
+                initial={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="absolute inset-0 w-full h-full flex items-center justify-center"
+              >
+                <Image
+                  src={images[activeImage].src}
+                  alt={images[activeImage].alt}
+                  width={800}
+                  height={800}
+                  className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(41,98,255,0.15)]"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
           {images.length > 1 && (
-            <div className="flex gap-6 mb-6">
+            <div className="shrink-0 flex gap-3 p-2 bg-zinc-900/50 rounded-2xl border border-zinc-800/50 backdrop-blur-sm max-w-full overflow-x-auto scrollbar-none">
               {images.map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveImage(index)}
-                  className={`w-20 h-20 rounded-lg overflow-hidden border ${
+                  className={`relative shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden transition-all duration-300 ${
                     activeImage === index
-                      ? "border-blue-500"
-                      : "border-gray-300"
+                      ? "ring-2 ring-[#2962ff] scale-100 opacity-100"
+                      : "ring-1 ring-zinc-700 scale-95 opacity-50 hover:opacity-100 hover:scale-100"
                   }`}
                 >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    width={80}
-                    height={80}
-                    className="object-contain w-full h-full"
-                  />
+                  <Image src={img.src} alt={`Thumbnail ${index + 1}`} fill className="object-cover" />
+                  {activeImage === index && <div className="absolute inset-0 bg-[#2962ff]/10"></div>}
                 </button>
               ))}
             </div>
           )}
-
-          <div
-            className={`mx-auto w-full ${
-              images.length === 1
-                ? "max-w-[480px] sm:max-w-[560px] md:max-w-[640px]"
-                : "max-w-[320px] sm:max-w-[360px] md:max-w-[400px]"
-            }`}
-          >
-            <Image
-              src={images[activeImage].src}
-              alt={images[activeImage].alt}
-              width={360}
-              height={640}
-              className="rounded-lg shadow-lg w-full h-auto object-contain
-                         transform hover:scale-105 transition"
-            />
-          </div>
         </div>
+        
       </div>
-    </div>
+    </section>
   );
 }
