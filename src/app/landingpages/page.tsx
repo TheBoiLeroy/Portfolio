@@ -1,40 +1,39 @@
-'use client'; // Required for Next.js 13+ app directory
+'use client';
 
 import React from 'react';
+import Image from 'next/image'; // Import added to fix LCP warning
 import { useForm, ValidationError } from '@formspree/react';
 
 export default function ContractorWorks() {
-  // Using your previous Formspree ID: xnjopyyp
   const [state, handleSubmit] = useForm("xnjopyyp");
 
   return (
     <div className="min-h-screen bg-[#131313] text-[#c3c5d8] font-sans selection:bg-[#2962ff] selection:text-white">
 
-  {/* TopNavBar Component */}
-        <header className="fixed top-0 w-full z-50 bg-[#1C1B1B] font-['Manrope'] font-bold tracking-tight border-b border-zinc-800/50">
-          <nav className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-            <div className="flex items-center gap-3">
-              {/* Logo added here */}
-              <img 
-                src="/images/projectimgs/logos/logo_ios.png"
-                alt="Contractor Works Logo" 
-                className="w-18 h-18 rounded-xl object-contain"
-              />
-              <div className="text-xl font-black text-white tracking-tighter">
-                Contractor Works
-              </div>
+      {/* TopNavBar Component */}
+      <header className="fixed top-0 w-full z-50 bg-[#1C1B1B] font-['Manrope'] font-bold tracking-tight border-b border-zinc-800/50">
+        <nav className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+          <div className="flex items-center gap-3">
+            {/* Optimized Next.js Image component */}
+            <Image 
+              src="/images/projectimgs/logos/logo_ios.png"
+              alt="Contractor Works Logo" 
+              width={40} 
+              height={40}
+              className="rounded-xl object-contain bg-[#201f1f] p-1 border border-zinc-700/50"
+            />
+            <div className="text-xl font-black text-white tracking-tighter">
+              Contractor Works
             </div>
-            
-            <div className="hidden md:flex items-center gap-8">
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <button className="px-6 py-2 rounded-md bg-[#2962ff] text-white active:scale-95 duration-200 transition-all text-sm font-bold">
-                Login
-              </button>
-            </div>
-          </nav>
-        </header>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <button className="px-6 py-2 rounded-md bg-[#2962ff] text-white active:scale-95 duration-200 transition-all text-sm font-bold">
+              Login
+            </button>
+          </div>
+        </nav>
+      </header>
 
       <main className="pt-24">
         {/* Hero Section */}
@@ -50,11 +49,10 @@ export default function ContractorWorks() {
               Streamline contractor management, job assignments, and payments with professional-grade precision. Engineered for the high-stakes site.
             </p>
 
-            {/* UPDATED: Join Testing Submission Section */}
             <div className="max-w-md mx-auto pt-6">
               {state.succeeded ? (
                 <div className="p-4 bg-[#00e47522] border border-[#00e475] rounded-lg text-[#00e475] font-bold animate-pulse">
-                  ✓ You've been added to the testing list!
+                  ✓ You&apos;ve been added to the testing list! {/* Fixed apostrophe here */}
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -90,7 +88,6 @@ export default function ContractorWorks() {
         {/* Product Showcase (Bento Grid) */}
         <section className="py-32 px-6 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            
             <div className="md:col-span-8 bg-[#1c1b1b] p-8 rounded-xl flex flex-col justify-between border-l-2 border-[#2962ff]">
               <div>
                 <div className="flex items-center gap-2 mb-4">
@@ -101,15 +98,15 @@ export default function ContractorWorks() {
                 <p className="text-[#c3c5d8] mb-8 max-w-md">Monitor site progress across 50+ locations simultaneously with live GPS telemetry and automated milestone reporting.</p>
               </div>
               <div className="grid grid-cols-3 gap-4">
-                <div className="bg-[#201f1f] p-4 rounded-lg">
+                <div className="bg-[#201f1f] p-4 rounded-lg text-center">
                   <div className="text-[#2962ff] font-['Manrope'] text-2xl font-bold">84%</div>
                   <div className="text-[10px] uppercase tracking-wider text-zinc-500">Completion</div>
                 </div>
-                <div className="bg-[#201f1f] p-4 rounded-lg">
+                <div className="bg-[#201f1f] p-4 rounded-lg text-center">
                   <div className="text-[#00e475] font-['Manrope'] text-2xl font-bold">12</div>
                   <div className="text-[10px] uppercase tracking-wider text-zinc-500">Active Sites</div>
                 </div>
-                <div className="bg-[#201f1f] p-4 rounded-lg">
+                <div className="bg-[#201f1f] p-4 rounded-lg text-center">
                   <div className="text-white font-['Manrope'] text-2xl font-bold">2.4k</div>
                   <div className="text-[10px] uppercase tracking-wider text-zinc-500">Man Hours</div>
                 </div>
