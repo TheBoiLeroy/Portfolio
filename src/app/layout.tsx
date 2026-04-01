@@ -2,7 +2,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'ContractorWorks | Field Work Management',
   description: 'The easiest way to manage your local crews with GPS clock-ins, photos, and timesheets.',
   openGraph: {
