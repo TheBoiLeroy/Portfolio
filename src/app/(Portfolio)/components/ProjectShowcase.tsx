@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { Project } from "@/app/data/projects";
-import { toolMetadata } from "@/app/data/toolMetadata";
+import type { Project } from "@/app/(Portfolio)/data/projects";
+import { toolMetadata } from "@/app/(Portfolio)/data/toolMetadata";
 import { MdArrowForward } from "react-icons/md";
 
 type ProjectShowcaseProps = Project;

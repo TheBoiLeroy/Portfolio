@@ -1,4 +1,4 @@
-import TimelineSteps from "@/app/components/HorizontalScrollTimeline";
+import TimelineSteps from "@/app/(Portfolio)/components/HorizontalScrollTimeline";
 export default function TimelinePage() {
   return (
     <main className="pt-20 bg-white dark:bg-black text-black dark:text-white overflow-x-hidden">

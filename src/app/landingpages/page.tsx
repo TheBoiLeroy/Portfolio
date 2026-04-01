@@ -26,12 +26,6 @@ export default function ContractorWorks() {
               Contractor Works
             </div>
           </div>
-          
-          <div className="flex items-center gap-4">
-            <button className="px-6 py-2 rounded-md bg-[#2962ff] text-white active:scale-95 duration-200 transition-all text-sm font-bold">
-              Login
-            </button>
-          </div>
         </nav>
       </header>
 

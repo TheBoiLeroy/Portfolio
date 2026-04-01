@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectImageCarousel from "./components/ProjectImageCarousel";
 import IntroSection from "./components/IntroComponent";
-import { timelineData } from "@/app/data/timeline";
-import { toolMetadata } from "@/app/data/toolMetadata";
+import { timelineData } from "@/app/(Portfolio)/data/timeline";
+import { toolMetadata } from "@/app/(Portfolio)/data/toolMetadata";
 
 export default function HomePage() {
   const TABS = ["Current Work", "Skills", "What I'm Working On"] as const;

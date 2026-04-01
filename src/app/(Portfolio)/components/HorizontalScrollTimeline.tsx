@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef, JSX } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { timelineData } from "@/app/data/timeline";
+import { timelineData } from "@/app/(Portfolio)/data/timeline";
 import {
   SiPython, SiCplusplus, SiHtml5, SiCss3, SiJavascript, SiTypescript,
   SiReact, SiNextdotjs, SiTailwindcss, SiDjango, SiPostgresql, SiSqlite, SiDocker,
