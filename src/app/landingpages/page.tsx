@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image'; // Import added to fix LCP warning
+import Image from 'next/image';
 import { useForm, ValidationError } from '@formspree/react';
 
 export default function ContractorWorks() {
@@ -14,7 +14,6 @@ export default function ContractorWorks() {
       <header className="fixed top-0 w-full z-50 bg-[#1C1B1B] font-['Manrope'] font-bold tracking-tight border-b border-zinc-800/50">
         <nav className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-3">
-            {/* Optimized Next.js Image component */}
             <Image 
               src="/images/projectimgs/logos/logo_ios.png"
               alt="Contractor Works Logo" 
@@ -46,33 +45,56 @@ export default function ContractorWorks() {
             <div className="max-w-md mx-auto pt-6">
               {state.succeeded ? (
                 <div className="p-4 bg-[#00e47522] border border-[#00e475] rounded-lg text-[#00e475] font-bold animate-pulse">
-                  ✓ You&apos;ve been added to the testing list! {/* Fixed apostrophe here */}
+                  ✓ You&apos;ve been added to the testing list!
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                  <div className="flex flex-col md:flex-row items-center justify-center gap-2">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left">
+                  {/* Email Field */}
+                  <div className="space-y-1">
+                    <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-zinc-500 ml-1">Email Address</label>
                     <input
                       id="email"
                       type="email" 
                       name="email"
-                      placeholder="Enter your email to join testing"
+                      placeholder="name@company.com"
                       required
-                      className="w-full md:w-80 px-6 py-4 bg-[#1c1b1b] border border-[#434656] rounded-lg text-white focus:outline-none focus:border-[#2962ff] transition-all"
+                      className="w-full px-6 py-4 bg-[#1c1b1b] border border-[#434656] rounded-lg text-white focus:outline-none focus:border-[#2962ff] transition-all"
                     />
-                    <button 
-                      type="submit" 
-                      disabled={state.submitting}
-                      className="w-full md:w-auto px-8 py-4 bg-[#2962ff] text-white rounded-lg font-bold text-lg hover:brightness-110 transition-all active:scale-95 disabled:opacity-50"
-                    >
-                      {state.submitting ? 'Sending...' : 'Join Testing'}
-                    </button>
+                    <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-sm font-bold" />
                   </div>
-                  <ValidationError 
-                    prefix="Email" 
-                    field="email"
-                    errors={state.errors}
-                    className="text-red-500 text-sm font-bold"
-                  />
+
+                  {/* Device Selection Field */}
+                  <div className="space-y-1">
+                    <label htmlFor="device" className="text-xs font-bold uppercase tracking-widest text-zinc-500 ml-1">Testing Device</label>
+                    <div className="relative">
+                      <select
+                        id="device"
+                        name="device"
+                        required
+                        className="w-full px-6 py-4 bg-[#1c1b1b] border border-[#434656] rounded-lg text-white appearance-none focus:outline-none focus:border-[#2962ff] transition-all cursor-pointer"
+                        defaultValue=""
+                      >
+                        <option value="" disabled>Select Android or iPhone</option>
+                        <option value="Android">Android</option>
+                        <option value="iPhone">iPhone</option>
+                      </select>
+                      {/* Chevron Icon */}
+                      <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-zinc-500">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <ValidationError prefix="Device" field="device" errors={state.errors} className="text-red-500 text-sm font-bold" />
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    disabled={state.submitting}
+                    className="w-full mt-2 px-8 py-4 bg-[#2962ff] text-white rounded-lg font-bold text-lg hover:brightness-110 transition-all active:scale-95 disabled:opacity-50"
+                  >
+                    {state.submitting ? 'Sending...' : 'Join Testing'}
+                  </button>
                 </form>
               )}
             </div>
