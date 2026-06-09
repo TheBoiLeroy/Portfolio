@@ -44,7 +44,7 @@ const AcheckLandingPage: React.FC = () => {
            {/* Faux App UI inside the mockup */}
            <div className="relative z-10 w-full max-w-md bg-white rounded-xl shadow-lg p-6 text-left">
              <div className="flex justify-between items-center mb-6">
-                <h3 className="font-bold text-xl">Today's Check-ins</h3>
+                <h3 className="font-bold text-xl">Today&apos;s Check-ins</h3>
                 <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-bold flex items-center">
                   🔥 14 Day Streak
                 </span>
