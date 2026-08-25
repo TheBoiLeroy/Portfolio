@@ -35,7 +35,10 @@ import {
   SiLinux,
   SiRaspberrypi,
   SiZdf,
+  SiMysql,
+  SiOpenai,
 } from 'react-icons/si';
+import { FaBrain, FaCloud, FaLock } from 'react-icons/fa';
 
 export const toolMetadata: Record<
   string,
@@ -216,5 +219,35 @@ WiFi: {
   type: "hardware",
   color: "#2563EB",
   icon: <FaWifi />,
+},
+TrueNAS: {
+  type: "infra",
+  color: "#2F80ED",
+  icon: <FaServer />,
+},
+"Self-hosted": {
+  type: "infra",
+  color: "#34D399",
+  icon: <FaLock />,
+},
+MySQL: {
+  type: "backend",
+  color: "#4479A1",
+  icon: <SiMysql />,
+},
+OpenAI: {
+  type: "backend",
+  color: "#A78BFA",
+  icon: <SiOpenai />,
+},
+Plaid: {
+  type: "backend",
+  color: "#60A5FA",
+  icon: <FaCloud />,
+},
+"Facial Recognition": {
+  type: "backend",
+  color: "#F59E0B",
+  icon: <FaBrain />,
 },
 };

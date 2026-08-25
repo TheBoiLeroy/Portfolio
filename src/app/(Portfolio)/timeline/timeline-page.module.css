@@ -1,0 +1,28 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(126, 34, 206, 0.16), transparent 27rem),
+    radial-gradient(circle at 92% 30%, rgba(34, 211, 238, 0.1), transparent 31rem),
+    #0a0910;
+  color: #f7f5ff;
+}
+
+.texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black, transparent 52rem);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 7rem;
+}

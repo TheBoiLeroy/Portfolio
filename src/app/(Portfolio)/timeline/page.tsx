@@ -1,15 +1,24 @@
+import { Container } from "@mantine/core";
+import { Route } from "lucide-react";
 import TimelineSteps from "@/app/(Portfolio)/components/HorizontalScrollTimeline";
+import PortfolioPageHero from "@/app/(Portfolio)/components/PortfolioPageHero";
+import styles from "./timeline-page.module.css";
+
 export default function TimelinePage() {
   return (
-    <main className="pt-20 bg-white dark:bg-black text-black dark:text-white overflow-x-hidden">
-      <section className="text-center py-10">
-        <h1 className="text-4xl font-bold">My Timeline</h1>
-        <p className="text-gray-600 dark:text-gray-400 mt-2">
-          Scroll down to follow my journey.
-        </p>
-      </section>
-
-      <TimelineSteps />
+    <main className={styles.page}>
+      <div className={styles.texture} aria-hidden="true" />
+      <PortfolioPageHero
+        eyebrow="The long version"
+        title="Small steps,"
+        highlight="real momentum."
+        description="A click-through story of the classes, side quests, team projects, and practical problems that shaped how I build."
+        icon={<Route size="48%" />}
+        color="violet"
+      />
+      <Container size="xl" className={styles.content}>
+        <TimelineSteps />
+      </Container>
     </main>
   );
 }

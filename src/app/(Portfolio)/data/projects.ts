@@ -6,6 +6,8 @@ export type Project = {
   images: { src: string; alt: string }[];
   tools: string[];
   linkToProject?: string;
+  status?: string;
+  vibeCoded?: boolean;
   schematics?: { dsc: string; src: string; alt: string }[]; // optional
   partsList?: { name: string; quantity?: number; link?: string }[]; // optional
   
@@ -13,7 +15,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Open Manet network with Rasbperry Pi's",
+    title: "Open MANET Network with Raspberry Pis",
     description:
       "A mobile ad-hoc network (MANET) using Raspberry Pi's and WiFi dongles to create a decentralized communication system without relying on traditional infrastructure. The project involves setting up multiple Raspberry Pi devices to form a mesh network, allowing them to communicate directly with each other over WiFi. This setup is particularly useful in scenarios where conventional networks are unavailable, such as in remote areas or during emergencies. The MANET was configured to enable dynamic routing, ensuring that data packets could find the most efficient path through the network based on current conditions. This project provided hands-on experience with networking concepts, Linux system administration, and the challenges of maintaining connectivity in a decentralized environment.",
     usefulLinks: ["https://github.com/OpenMANET"],
@@ -47,15 +49,12 @@ export const projects: Project[] = [
     tools: ["Raspberry Pi", "WiFi", "Linux", "Networking"],
   },
   {
-    title: "House Hold NAS System",
+    title: "Household NAS System",
     usefulLinks: [""],
     description:
       "A custom-built Network Attached Storage (NAS) system designed to provide centralized data storage and file sharing for a household. The NAS was constructed using a repurposed desktop computer, equipped with multiple hard drives configured in RAID for data redundancy and performance. The system runs on FreeNAS, an open-source operating system tailored for NAS applications, offering features such as user management, file sharing protocols (SMB, NFS), and media streaming capabilities. This project involved setting up the hardware, installing and configuring the FreeNAS software, and optimizing network settings to ensure seamless access from various devices within the home network. The NAS serves as a reliable solution for backing up important files, streaming media content, and facilitating easy file access across multiple platforms.",
     tdl:["add more drives to increase storage capacity", "implement automated backup solutions"],
-    images: [
-      { src: "/images/projectimgs/nas1.jpg", alt: "NAS System Front View" },
-      { src: "/images/projectimgs/nas2.jpg", alt: "NAS System Internal View" },
-    ],
+    images: [],
     tools: ["FreeNAS", "ZFS", "RAID", "Samba", "Linux"],
 
   },
@@ -94,4 +93,83 @@ export const projects: Project[] = [
     linkToProject: "email for access",
   },
   
+];
+
+export const truenasProjects: Project[] = [
+  {
+    title: "Mise — Voice Memos to Recipes",
+    status: "Actively building",
+    vibeCoded: true,
+    usefulLinks: [],
+    description:
+      "A voice-first recipe library for preserving the meals my grandmother, mother, and wife describe from memory. They can simply talk through the ingredients and method, and the app turns the recording into an organized, searchable recipe. It currently uses OpenAI transcription; the next major step is a fully local transcription option so families with privacy or security concerns can use it without sending recordings to an external API.",
+    tdl: [
+      "[x] Record and organize spoken family recipes",
+      "[x] Transcribe voice memos into structured recipes",
+      "[ ] Add a local-only transcription mode",
+      "[ ] Remove required external API calls",
+    ],
+    images: [
+      {
+        src: "/images/projectimgs/TrueNasImages/WorkingOn/Screenshot 2026-08-25 at 10.41.38 AM.png",
+        alt: "Mise recipe library with an option to add a voice memo",
+      },
+    ],
+    tools: ["TrueNAS", "OpenAI", "Self-hosted"],
+  },
+  {
+    title: "Family Finance",
+    status: "Testing with mock data",
+    vibeCoded: true,
+    usefulLinks: [],
+    description:
+      "A private household budgeting dashboard I started to help my wife and me understand our shared finances. It brings accounts, monthly spending, planned expenses, and credit usage into one view while still letting each of us see individual and joint activity. The project is currently being tested with fake Plaid data before any real financial information is connected.",
+    tdl: [
+      "[x] Build individual, partner, and joint account views",
+      "[x] Test account syncing with fake Plaid data",
+      "[ ] Complete security review before using real data",
+    ],
+    images: [
+      {
+        src: "/images/projectimgs/TrueNasImages/BudgetApp/Screenshot 2026-08-24 at 7.54.08 PM.png",
+        alt: "Family Finance dashboard using mock account and spending data",
+      },
+    ],
+    tools: ["TrueNAS", "Plaid", "Self-hosted"],
+  },
+  {
+    title: "Private Family Tree",
+    status: "Running on TrueNAS",
+    vibeCoded: true,
+    usefulLinks: [],
+    description:
+      "A self-hosted family tree that keeps our genealogy available to the family without placing the underlying records on a public platform. It runs on my TrueNAS server and stores family relationships and historical details in MySQL, giving me direct control over access, backups, and long-term ownership of the data.",
+    images: [
+      {
+        src: "/images/projectimgs/TrueNasImages/FamilyTree/Screenshot 2026-08-25 at 10.36.23 AM.png",
+        alt: "A private, self-hosted hourglass family tree view",
+      },
+    ],
+    tools: ["TrueNAS", "MySQL", "Self-hosted"],
+  },
+  {
+    title: "Personal Google Photos",
+    status: "Running — hardware limited",
+    vibeCoded: true,
+    usefulLinks: [],
+    description:
+      "A private photo and video browser for the media my phone uploads to TrueNAS. It makes the server's folders easier to explore and adds open-source facial recognition so I can label people and organize photos by face. I am continuously improving the identifications; indexing speed and recognition workloads are currently limited by the server's hardware.",
+    tdl: [
+      "[x] Browse phone uploads from the TrueNAS library",
+      "[x] Search and organize media by identified faces",
+      "[ ] Improve recognition speed with future hardware upgrades",
+    ],
+    images: [
+      {
+        src: "/images/projectimgs/TrueNasImages/PersonalGooglePhotos/Screenshot 2026-08-25 at 10.33.18 AM.png",
+        alt: "Self-hosted TrueNAS video library",
+      },
+    ],
+    tools: ["TrueNAS", "Facial Recognition", "Self-hosted"],
+  },
 ];

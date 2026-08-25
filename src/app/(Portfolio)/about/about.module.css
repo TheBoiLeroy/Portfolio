@@ -1,0 +1,63 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(24, 22, 32, 0.84);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(16px);
+}
+
+.story {
+  grid-column: span 7;
+}
+
+.quickFacts {
+  grid-column: span 5;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(192, 132, 252, 0.18), transparent 20rem),
+    rgba(24, 22, 32, 0.84);
+}
+
+.principle {
+  grid-column: span 4;
+  min-height: 280px;
+}
+
+.closing {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(105deg, #f0abfc, #67e8f9 57%, #bef264);
+  color: #18111f;
+}
+
+.fact {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fact:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 52rem) {
+  .story,
+  .quickFacts,
+  .principle {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 38rem) {
+  .closing {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
