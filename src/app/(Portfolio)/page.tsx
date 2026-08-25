@@ -1,221 +1,345 @@
 "use client";
 
-import { useState, useId } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ProjectImageCarousel from "./components/ProjectImageCarousel";
-import IntroSection from "./components/IntroComponent";
-import { timelineData } from "@/app/(Portfolio)/data/timeline";
-import { toolMetadata } from "@/app/(Portfolio)/data/toolMetadata";
+import {
+  Badge,
+  Box,
+  Button,
+  Container,
+  Group,
+  Paper,
+  SegmentedControl,
+  SimpleGrid,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
+} from "@mantine/core";
+import {
+  ArrowUpRight,
+  BookOpen,
+  Code2,
+  Database,
+  GitBranch,
+  GraduationCap,
+  Heart,
+  Languages,
+  Rocket,
+  Server,
+  Sparkles,
+  WandSparkles,
+} from "lucide-react";
+import styles from "./home.module.css";
+
+const projectImages = {
+  v1: {
+    src: "/images/projectimgs/v1/simBossDash.png",
+    alt: "The first ContractorWorks boss dashboard",
+  },
+  v2: {
+    src: "/images/projectimgs/v2/BossDash.png",
+    alt: "The redesigned ContractorWorks boss dashboard",
+  },
+};
+
+const tools = [
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Python",
+  "Django",
+  "PostgreSQL",
+  "Docker",
+  "TrueNAS",
+];
+
+const homelabProjects = [
+  { name: "Mise", note: "voice memo → recipe", icon: BookOpen },
+  { name: "Family Finance", note: "shared budget lab", icon: Database },
+  { name: "Family Tree", note: "private genealogy", icon: GitBranch },
+  { name: "Photo Library", note: "local face search", icon: Heart },
+];
 
 export default function HomePage() {
-  const TABS = ["Current Work", "Skills", "What I'm Working On"] as const;
-  type Tab = (typeof TABS)[number];
-
-  // State for main tabs and image versioning
-  const [activeTab, setActiveTab] = useState<Tab>("Current Work");
-  const [version, setVersion] = useState<"v1" | "v2">("v1");
-  const tablistId = useId();
-
-  // Define image sets for v1 and v2
-  const projectImages = {
-    v1: [
-      { src: "/images/projectimgs/v1/simLongin.png", alt: "V1 Login Screen" },
-      { src: "/images/projectimgs/v1/simBossDash.png", alt: "V1 Boss Dashboard" },
-      { src: "/images/projectimgs/v1/simContractorView.png", alt: "V1 Contractor View" },
-    ],
-    v2: [
-      { src: "/images/projectimgs/v2/Login.png", alt: "V2 Login Screen" },
-      { src: "/images/projectimgs/v2/BossDash.png", alt: "V2 Boss Dashboard" },
-      { src: "/images/projectimgs/v2/ClockIn.png", alt: "V2 Contractor View" },
-    ],
-  };
-
-  // Build a unique, filtered list of tools
-  const tools: string[] = Array.from(
-    new Set(
-      timelineData.flatMap((item) =>
-        typeof item.tools === "string"
-          ? item.tools.split(",").map((t) => t.trim()).filter(Boolean)
-          : item.tools || []
-      )
-    )
-  ).filter((tool) => Boolean(toolMetadata[tool]));
+  const [version, setVersion] = useState<"v1" | "v2">("v2");
 
   return (
-    <main className="min-h-screen px-4 sm:px-6 py-12 md:py-20 bg-white dark:bg-black text-black dark:text-white overflow-x-hidden">
-      <section className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-10 max-w-5xl mx-auto">
-        
-        {/* 🖼️ Profile Picture - Fixed for mobile scaling & centering */}
-        <div className="w-full max-w-[300px] mx-auto md:mx-0 border border-gray-300 dark:border-gray-700 shadow-md shrink-0">
-          <Image
-            src="/webPP.jpg"
-            alt="Profile picture"
-            width={300}
-            height={300}
-            priority
-            className="w-full h-auto object-contain block"
-          />
-        </div>
+    <main className={styles.page}>
+      <div className={styles.gridTexture} aria-hidden="true" />
+      <div className={`${styles.orb} ${styles.orbOne}`} aria-hidden="true" />
+      <div className={`${styles.orb} ${styles.orbTwo}`} aria-hidden="true" />
 
-        {/* 🧑‍💻 Intro + Timeline + Tabs - Added min-w-0 to prevent flex overflow */}
-        <div className="flex-1 w-full min-w-0">
-          <IntroSection />
+      <Container size="xl" className={styles.container}>
+        <section className={styles.hero}>
+          <Stack gap="xl" className={styles.heroCopy}>
+            <Badge
+              size="lg"
+              variant="light"
+              color="lime"
+              leftSection={<Sparkles size={14} />}
+              className={styles.statusBadge}
+            >
+              Full-stack builder · San Mateo, CA
+            </Badge>
 
-          <div className="my-10 w-full">
-            <div className="rounded-lg bg-white dark:bg-neutral-900 shadow border border-gray-200 dark:border-neutral-700 p-4 sm:p-6">
-              
-              {/* Header: Tabs - Added flex-wrap for mobile */}
-              <div className="mb-6">
-                <div
-                  role="tablist"
-                  aria-label="Profile sections"
-                  className="flex flex-wrap gap-2 sm:gap-3"
-                  id={tablistId}
-                >
-                  {TABS.map((tab) => {
-                    const selected = activeTab === tab;
-                    return (
-                      <button
-                        key={tab}
-                        role="tab"
-                        aria-selected={selected}
-                        aria-controls={`panel-${tab.replace(/\s+/g, "-")}`}
-                        onClick={() => setActiveTab(tab)}
-                        className={`px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 dark:focus:ring-neutral-600 ${
-                          selected
-                            ? "bg-black text-white dark:bg-white dark:text-black"
-                            : "bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-700"
-                        }`}
-                      >
-                        {tab}
-                      </button>
-                    );
-                  })}
-                </div>
+            <Box>
+              <Text className={styles.kicker}>Hi, I&apos;m Ian.</Text>
+              <Title order={1} className={styles.heroTitle}>
+                I turn everyday problems into{" "}
+                <span>useful little systems.</span>
+              </Title>
+            </Box>
+
+            <Text className={styles.heroDescription}>
+              I&apos;m a UC Santa Cruz Computer Science graduate building thoughtful
+              web products, AI-assisted experiments, and privacy-minded tools for
+              real people—often from the server in my own home.
+            </Text>
+
+            <Group gap="md">
+              <Button
+                component={Link}
+                href="/projects"
+                size="lg"
+                radius="xl"
+                rightSection={<ArrowUpRight size={18} />}
+                className={styles.primaryButton}
+              >
+                Explore my work
+              </Button>
+              <Button
+                component={Link}
+                href="/timeline"
+                size="lg"
+                radius="xl"
+                variant="default"
+                leftSection={<Rocket size={18} />}
+                className={styles.secondaryButton}
+              >
+                My timeline
+              </Button>
+            </Group>
+
+            <Group gap="sm" className={styles.heroTags}>
+              <Badge variant="outline" color="grape">AI-assisted</Badge>
+              <Badge variant="outline" color="cyan">Self-hosted</Badge>
+              <Badge variant="outline" color="orange">English + Spanish</Badge>
+              <Badge variant="outline" color="pink">Always tinkering</Badge>
+            </Group>
+          </Stack>
+
+          <div className={styles.portraitStage}>
+            <div className={styles.sparkleSticker} aria-hidden="true">✦</div>
+            <div className={styles.codeSticker} aria-hidden="true">{`{ build: "joy" }`}</div>
+            <Paper className={styles.portraitCard} radius="xl">
+              <div className={styles.portraitFrame}>
+                <Image
+                  src="/webPP.jpg"
+                  alt="Ian Santos"
+                  width={560}
+                  height={560}
+                  priority
+                  className={styles.portrait}
+                />
               </div>
-
-              {/* --- Tab Panels --- */}
-
-              {/* 1. Current Work Panel */}
-              {activeTab === "Current Work" && (
-                <div
-                  id="panel-Current-Work"
-                  role="tabpanel"
-                  aria-labelledby={tablistId}
-                  className="space-y-4"
-                >
-                  {/* Version Toggle - Stacked on mobile, row on tablet/desktop */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-neutral-50 dark:bg-neutral-800/50 p-3 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                    
-                    <div className="flex items-center justify-between w-full sm:w-auto">
-                      <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 mr-4">
-                        Version: <span className="text-blue-500">{version}</span>
-                      </span>
-                      <div className="flex gap-1 bg-neutral-200 dark:bg-neutral-900 p-1 rounded-md">
-                        <button
-                          onClick={() => setVersion("v1")}
-                          className={`px-3 py-1 text-xs font-semibold rounded transition ${
-                            version === "v1" 
-                              ? "bg-white dark:bg-neutral-700 shadow-sm text-black dark:text-white" 
-                              : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
-                          }`}
-                        >
-                          V1
-                        </button>
-                        <button
-                          onClick={() => setVersion("v2")}
-                          className={`px-3 py-1 text-xs font-semibold rounded transition ${
-                            version === "v2" 
-                              ? "bg-white dark:bg-neutral-700 shadow-sm text-black dark:text-white" 
-                              : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
-                          }`}
-                        >
-                          V2
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Navigation to /landingpages */}
-                    <Link
-                      href="/landingpages"
-                      className="w-full sm:w-auto flex justify-center items-center gap-2 px-4 py-2 text-sm font-bold text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-all active:scale-95"
-                    >
-                      View Landing Pages
-                      <span>→</span>
-                    </Link>
-                  </div>
-
-                  <div className="rounded-md overflow-hidden border dark:border-neutral-800">
-                    <ProjectImageCarousel
-                      key={version}
-                      images={projectImages[version]}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* 2. Skills Panel */}
-              {activeTab === "Skills" && (
-                <div
-                  id="panel-Skills"
-                  role="tabpanel"
-                  aria-labelledby={tablistId}
-                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4"
-                >
-                  {tools.map((tool) => {
-                    const meta = toolMetadata[tool];
-                    if (!meta) return null;
-                    const { color, icon } = meta;
-                    return (
-                      <div
-                        key={tool}
-                        className="flex items-center gap-2 border rounded-md p-2 text-xs sm:text-sm dark:border-neutral-700 transition hover:bg-neutral-50 dark:hover:bg-neutral-800"
-                        style={{ borderColor: color }}
-                      >
-                        <span className="text-base sm:text-lg" style={{ color }}>
-                          {icon}
-                        </span>
-                        <span className="text-neutral-800 dark:text-neutral-100 truncate">{tool}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* 3. What I'm Working On Panel */}
-              {activeTab === "What I'm Working On" && (
-                <div
-                  id="panel-What-I'm-Working-On"
-                  role="tabpanel"
-                  aria-labelledby={tablistId}
-                  className="space-y-4 sm:space-y-6"
-                >
-                  <div className="bg-neutral-50 dark:bg-neutral-800/30 p-4 rounded-lg">
-                    <p className="text-neutral-600 dark:text-neutral-300 font-bold mb-2">My Homelab</p>
-                    <ul className="list-disc pl-5 space-y-1 text-sm">
-                      <li>TrueNAS server setup</li>
-                      <li>Repurposed an old Dell 3050</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-neutral-50 dark:bg-neutral-800/30 p-4 rounded-lg">
-                    <p className="text-neutral-600 dark:text-neutral-300 font-bold mb-2">
-                      OpenMANET (Raspberry Pi Cluster)
-                    </p>
-                    <ul className="list-disc pl-5 space-y-1 text-sm">
-                      <li>Learning Kubernetes</li>
-                      <li>Experimenting with Docker</li>
-                      <li>Setting up an OpenMANET cluster</li>
-                      <li>Follow my progress in my Projects</li>
-                    </ul>
-                  </div>
-                </div>
-              )}
-            </div>
+              <Group justify="space-between" align="flex-end" mt="lg">
+                <Box>
+                  <Text size="xs" tt="uppercase" fw={800} c="dimmed" lts="0.12em">
+                    Current mode
+                  </Text>
+                  <Text fw={800} size="lg">Build · test · learn · repeat</Text>
+                </Box>
+                <ThemeIcon size="xl" radius="xl" color="lime" variant="light">
+                  <Code2 size={22} />
+                </ThemeIcon>
+              </Group>
+            </Paper>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="md" className={styles.statsRow}>
+          <Paper className={`${styles.bentoCard} ${styles.statCard}`}>
+            <Text className={styles.statNumber}>10</Text>
+            <Text className={styles.statLabel}>years staying curious</Text>
+          </Paper>
+          <Paper className={`${styles.bentoCard} ${styles.statCard}`}>
+            <GraduationCap size={26} className={styles.statIcon} />
+            <Text className={styles.statNumber}>UCSC</Text>
+            <Text className={styles.statLabel}>Computer Science · 2024</Text>
+          </Paper>
+          <Paper className={`${styles.bentoCard} ${styles.statCard}`}>
+            <Languages size={26} className={styles.statIcon} />
+            <Text className={styles.statNumber}>EN / ES</Text>
+            <Text className={styles.statLabel}>ideas travel better in two languages</Text>
+          </Paper>
+        </SimpleGrid>
+
+        <section className={styles.bentoGrid} aria-label="A snapshot of my work">
+          <Paper className={`${styles.bentoCard} ${styles.currentBuild}`}>
+            <Group justify="space-between" align="flex-start" mb="lg">
+              <Box>
+                <Badge color="violet" variant="light" mb="sm">Current build</Badge>
+                <Title order={2} className={styles.cardTitle}>ContractorWorks</Title>
+                <Text c="dimmed" maw={560}>
+                  A mobile-first workspace for crews, contractors, job sites, and
+                  timesheets—with every iteration getting clearer and faster.
+                </Text>
+              </Box>
+              <ThemeIcon size={52} radius="xl" color="violet" variant="light">
+                <WandSparkles size={25} />
+              </ThemeIcon>
+            </Group>
+
+            <SegmentedControl
+              value={version}
+              onChange={(value) => setVersion(value as "v1" | "v2")}
+              data={[
+                { label: "First pass", value: "v1" },
+                { label: "Latest pass", value: "v2" },
+              ]}
+              color="violet"
+              radius="xl"
+              className={styles.versionControl}
+            />
+
+            <div className={styles.projectPreview}>
+              <Image
+                key={version}
+                src={projectImages[version].src}
+                alt={projectImages[version].alt}
+                width={1100}
+                height={660}
+                className={styles.projectImage}
+              />
+            </div>
+          </Paper>
+
+          <Paper className={`${styles.bentoCard} ${styles.homelabCard}`}>
+            <Group justify="space-between" align="center" mb="md">
+              <Box>
+                <Text className={styles.eyebrow}>The homelab</Text>
+                <Title order={2} className={styles.cardTitle}>Home server,<br />family-sized ideas.</Title>
+              </Box>
+              <ThemeIcon size={54} radius="xl" color="cyan" variant="light">
+                <Server size={26} />
+              </ThemeIcon>
+            </Group>
+
+            <Stack gap="sm" mt="xl">
+              {homelabProjects.map(({ name, note, icon: Icon }) => (
+                <Group key={name} className={styles.labProject} wrap="nowrap">
+                  <ThemeIcon variant="light" color="cyan" radius="md">
+                    <Icon size={16} />
+                  </ThemeIcon>
+                  <Box className={styles.labProjectCopy}>
+                    <Text fw={800}>{name}</Text>
+                    <Text size="xs" c="dimmed">{note}</Text>
+                  </Box>
+                  <ArrowUpRight size={15} className={styles.miniArrow} />
+                </Group>
+              ))}
+            </Stack>
+
+            <Button
+              component={Link}
+              href="/projects#homelab-projects"
+              variant="subtle"
+              color="cyan"
+              mt="lg"
+              px={0}
+              rightSection={<ArrowUpRight size={16} />}
+            >
+              Visit the lab
+            </Button>
+          </Paper>
+
+          <Paper className={`${styles.bentoCard} ${styles.toolboxCard}`}>
+            <Group justify="space-between" mb="lg">
+              <Box>
+                <Text className={styles.eyebrow}>My toolbox</Text>
+                <Title order={2} className={styles.cardTitle}>Tools change.<br />Curiosity sticks.</Title>
+              </Box>
+              <ThemeIcon size={50} radius="xl" color="orange" variant="light">
+                <Code2 size={24} />
+              </ThemeIcon>
+            </Group>
+            <Group gap="sm">
+              {tools.map((tool, index) => (
+                <Badge
+                  key={tool}
+                  size="lg"
+                  radius="md"
+                  variant={index % 3 === 0 ? "filled" : "light"}
+                  color={["orange", "violet", "cyan", "pink"][index % 4]}
+                  className={styles.toolBadge}
+                >
+                  {tool}
+                </Badge>
+              ))}
+            </Group>
+          </Paper>
+
+          <Paper className={`${styles.bentoCard} ${styles.processCard}`}>
+            <div className={styles.doodleArrow} aria-hidden="true">↝</div>
+            <ThemeIcon size={50} radius="xl" color="lime" variant="light" mb="lg">
+              <Sparkles size={24} />
+            </ThemeIcon>
+            <Text className={styles.eyebrow}>How I build</Text>
+            <Title order={2} className={styles.cardTitle}>Vibe first.<br />Then make it real.</Title>
+            <Text c="dimmed" mt="md" className={styles.processText}>
+              I use AI to prototype quickly, then I slow down: test the edges,
+              understand the code, protect the data, and own what ships.
+            </Text>
+          </Paper>
+
+          <Paper className={`${styles.bentoCard} ${styles.timelineCard}`}>
+            <Group justify="space-between" align="flex-start">
+              <Box>
+                <Text className={styles.eyebrow}>A tiny timeline</Text>
+                <Title order={2} className={styles.cardTitle}>Still becoming.</Title>
+              </Box>
+              <ThemeIcon size={50} radius="xl" color="pink" variant="light">
+                <Rocket size={24} />
+              </ThemeIcon>
+            </Group>
+            <div className={styles.timelineList}>
+              <div><strong>2016</strong><span>started learning to code</span></div>
+              <div><strong>2024</strong><span>graduated from UC Santa Cruz</span></div>
+              <div><strong>Now</strong><span>shipping, self-hosting, experimenting</span></div>
+            </div>
+            <Button
+              component={Link}
+              href="/timeline"
+              variant="white"
+              color="dark"
+              radius="xl"
+              rightSection={<ArrowUpRight size={16} />}
+              className={styles.timelineButton}
+            >
+              See the whole story
+            </Button>
+          </Paper>
+        </section>
+
+        <Paper className={styles.closingCard}>
+          <div>
+            <Text className={styles.closingKicker}>Have a problem worth untangling?</Text>
+            <Title order={2} className={styles.closingTitle}>Let&apos;s make something useful—and a little delightful.</Title>
+          </div>
+          <Button
+            component={Link}
+            href="/contact"
+            size="lg"
+            radius="xl"
+            color="dark"
+            rightSection={<ArrowUpRight size={18} />}
+          >
+            Say hello
+          </Button>
+        </Paper>
+      </Container>
     </main>
   );
 }

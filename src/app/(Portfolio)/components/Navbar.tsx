@@ -1,51 +1,86 @@
 "use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Burger, Button } from "@mantine/core";
 import { Download } from "lucide-react";
+import styles from "./navbar.module.css";
+
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "Timeline", href: "/timeline" },
+  { name: "Projects", href: "/projects" },
+  { name: "Contact", href: "/contact" },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [opened, setOpened] = useState(false);
 
-  const navItems = [
-    { name: "Home", href: "/" },
-    { name: "Timeline", href: "/timeline" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
-  ];
+  useEffect(() => {
+    setOpened(false);
+  }, [pathname]);
+
+  const links = navItems.map(({ name, href }) => (
+    <Link
+      key={href}
+      href={href}
+      className={`${styles.navLink} ${pathname === href ? styles.active : ""}`}
+    >
+      {name}
+    </Link>
+  ));
 
   return (
-    <nav className="w-full fixed top-0 left-0 bg-black text-white px-6 py-4 flex items-center justify-between z-50">
-      <h1 className="text-4xl sm:text-5xl font-mono font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text">
-  Ian Santos
-</h1>
-
-
-
-      <div className="flex items-center space-x-8">
-        <ul className="flex items-center space-x-6 font-mono text-sm">
-          {navItems.map(({ name, href }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className={`hover:underline transition-colors duration-150 ${
-                  pathname === href ? "text-blue-400" : ""
-                }`}
-              >
-                {name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <Link
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border border-gray-500 hover:border-white px-4 py-2 rounded-md text-sm flex items-center gap-2"
-        >
-          <Download size={16} /> Resume
+    <nav className={styles.nav} aria-label="Primary navigation">
+      <div className={styles.bar}>
+        <Link href="/" className={styles.brand} aria-label="Ian Santos — home">
+          <span className={styles.brandMark}>IS</span>
+          <span>Ian Santos</span>
         </Link>
+
+        <div className={styles.desktopNav}>
+          {links}
+          <Button
+            component={Link}
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            radius="xl"
+            leftSection={<Download size={15} />}
+            className={styles.resumeButton}
+          >
+            Résumé
+          </Button>
+        </div>
+
+        <Burger
+          opened={opened}
+          onClick={() => setOpened((value) => !value)}
+          aria-label={opened ? "Close navigation" : "Open navigation"}
+          color="white"
+          size="sm"
+          className={styles.burger}
+        />
       </div>
+
+      {opened && (
+        <div className={styles.mobileMenu}>
+          {links}
+          <Button
+            component={Link}
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            radius="xl"
+            leftSection={<Download size={15} />}
+            className={styles.mobileResume}
+          >
+            Open résumé
+          </Button>
+        </div>
+      )}
     </nav>
   );
 }

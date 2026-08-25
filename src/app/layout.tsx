@@ -1,34 +1,50 @@
 // app/layout.tsx
+import "@mantine/core/styles.css";
 import "./globals.css";
 import type { Metadata } from "next";
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  createTheme,
+  mantineHtmlProps,
+} from "@mantine/core";
+
+const theme = createTheme({
+  primaryColor: "violet",
+  defaultRadius: "lg",
+  fontFamily: "Arial, Helvetica, sans-serif",
+  headings: {
+    fontFamily: "Arial, Helvetica, sans-serif",
+    fontWeight: "800",
+  },
+});
 
 export const metadata: Metadata = {
-  title: 'ContractorWorks | Field Work Management',
-  description: 'The easiest way to manage your local crews with GPS clock-ins, photos, and timesheets.',
+  metadataBase: new URL("https://iansantos.space"),
+  title: "Ian Santos | Full-Stack Developer",
+  description:
+    "Ian Santos builds thoughtful web products, AI-assisted experiments, and privacy-minded tools.",
   openGraph: {
-    title: 'ContractorWorks',
-    description: 'The easiest way to manage your local crews with GPS clock-ins, photos, and timesheets.',
-    url: 'https://iansantos.space/landingpages',
-    siteName: 'ContractorWorks',
-    images: [
-      {
-        url: '/og-image.jpg', // You will create this in the next step
-        width: 1200,
-        height: 630,
-        alt: 'ContractorWorks App Preview',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
+    title: "Ian Santos | Full-Stack Developer",
+    description:
+      "Thoughtful web products, AI-assisted experiments, and privacy-minded tools.",
+    url: "https://iansantos.space",
+    siteName: "Ian Santos",
+    locale: "en_US",
+    type: "website",
   },
-}
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" {...mantineHtmlProps} suppressHydrationWarning>
+      <head>
+        <ColorSchemeScript defaultColorScheme="dark" />
+      </head>
       <body className="min-h-dvh flex flex-col bg-white dark:bg-black text-black dark:text-white">
-        {/* Navbar and Footer REMOVED from here */}
-        {children}
+        <MantineProvider theme={theme} defaultColorScheme="dark">
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );
