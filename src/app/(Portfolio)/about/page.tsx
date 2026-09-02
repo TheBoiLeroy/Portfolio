@@ -19,9 +19,7 @@ import {
   Languages,
   Lightbulb,
   LockKeyhole,
-  UserRound,
 } from "lucide-react";
-import PortfolioPageHero from "../components/PortfolioPageHero";
 import pageStyles from "../components/portfolio-page.module.css";
 import styles from "./about.module.css";
 
@@ -50,16 +48,7 @@ export default function AboutPage() {
   return (
     <main className={pageStyles.page}>
       <div className={pageStyles.texture} aria-hidden="true" />
-      <PortfolioPageHero
-        eyebrow="A little more context"
-        title="Builder by habit."
-        highlight="Human on purpose."
-        description="I like software most when it leaves the screen and becomes part of somebody’s actual life."
-        icon={<UserRound size="48%" />}
-        color="orange"
-      />
-
-      <Container size="xl" className={pageStyles.content}>
+      <Container size="xl" className={`${pageStyles.content} ${styles.content}`}>
         <div className={styles.grid}>
           <Paper radius="xl" className={`${styles.card} ${styles.story}`}>
             <Badge color="orange" variant="light">The short version</Badge>
