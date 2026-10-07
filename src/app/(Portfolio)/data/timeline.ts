@@ -3,7 +3,7 @@ export const timelineData = [
   {
     year: "2016",
     title: "Junior Year of High School",
-    description: "My first exposure to programming with Python. I was instantly intreagued!",
+    description: "My first exposure to programming with Python. I was instantly intrigued!",
     tools: "Python",
   },
   {

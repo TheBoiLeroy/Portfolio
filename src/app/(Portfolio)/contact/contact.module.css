@@ -1,0 +1,68 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.side,
+.formCard {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(24, 22, 32, 0.84);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(16px);
+}
+
+.side {
+  background:
+    radial-gradient(circle at 0% 100%, rgba(34, 211, 238, 0.16), transparent 22rem),
+    rgba(24, 22, 32, 0.84);
+}
+
+.channel {
+  display: block;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.18);
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.channel:hover {
+  border-color: rgba(103, 232, 249, 0.35);
+  transform: translateX(4px);
+}
+
+.channelCopy {
+  min-width: 0;
+  flex: 1;
+}
+
+.channelValue {
+  overflow: hidden;
+  color: #aaa6bb;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.input {
+  --input-bg: rgba(0, 0, 0, 0.22);
+  --input-bd: rgba(255, 255, 255, 0.12);
+  --input-color: white;
+  --input-placeholder-color: #6f6a7d;
+}
+
+@media (max-width: 50rem) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,126 @@
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0.8rem;
+  left: 50%;
+  width: min(calc(100% - 1.5rem), 78rem);
+  transform: translateX(-50%);
+}
+
+.bar {
+  display: flex;
+  min-height: 68px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.75rem 0.65rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.4rem;
+  background: rgba(10, 9, 16, 0.82);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: white;
+  font-size: 1.12rem;
+  font-weight: 950;
+  letter-spacing: -0.035em;
+  text-decoration: none;
+}
+
+.brandMark {
+  display: grid;
+  width: 2.45rem;
+  height: 2.45rem;
+  place-items: center;
+  border-radius: 0.85rem;
+  color: #17101b;
+  background: linear-gradient(135deg, #c084fc, #67e8f9 55%, #bef264);
+  font-family: monospace;
+  font-size: 0.88rem;
+  transform: rotate(-4deg);
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.navLink {
+  padding: 0.68rem 0.85rem;
+  border-radius: 0.8rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.navLink:hover,
+.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.resumeButton {
+  margin-left: 0.45rem;
+  color: #17101b;
+  background: #bef264;
+}
+
+.resumeButton:hover {
+  background: #d9f99d;
+}
+
+.burger {
+  display: none;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 48rem) {
+  .nav {
+    top: 0.55rem;
+    width: calc(100% - 1rem);
+  }
+
+  .bar {
+    min-height: 60px;
+    padding: 0.5rem 0.55rem 0.5rem 0.8rem;
+    border-radius: 1.15rem;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+  }
+
+  .mobileMenu {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 0.45rem;
+    padding: 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1.15rem;
+    background: rgba(10, 9, 16, 0.95);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(18px);
+  }
+
+  .mobileMenu .navLink {
+    padding: 0.78rem 0.9rem;
+  }
+
+  .mobileResume {
+    margin-top: 0.25rem;
+  }
+}

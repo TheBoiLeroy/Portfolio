@@ -1,0 +1,186 @@
+.timelineGrid {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.rail,
+.storyCard,
+.toolCard {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(24, 22, 32, 0.84);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(16px);
+}
+
+.rail {
+  position: sticky;
+  top: 6rem;
+  padding: 1rem;
+}
+
+.stepButton {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 1rem;
+  color: #8f8a9f;
+  text-align: left;
+  transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.stepButton:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.activeStep {
+  color: white;
+  background: linear-gradient(110deg, rgba(126, 34, 206, 0.38), rgba(34, 211, 238, 0.11));
+  transform: translateX(4px);
+}
+
+.stepYear {
+  min-width: 3.4rem;
+  color: #c084fc;
+  font-family: monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.stepTitle {
+  overflow: hidden;
+  font-size: 0.78rem;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.storyColumn {
+  display: grid;
+  gap: 1rem;
+}
+
+.storyCard {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 3.2rem);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(192, 132, 252, 0.16), transparent 24rem),
+    rgba(24, 22, 32, 0.88);
+}
+
+.yearGhost {
+  position: absolute;
+  top: -1.5rem;
+  right: -0.5rem;
+  color: rgba(255, 255, 255, 0.035);
+  font-size: clamp(7rem, 19vw, 14rem);
+  font-weight: 950;
+  letter-spacing: -0.08em;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.storyContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-height: 420px;
+  flex-direction: column;
+}
+
+.storyTitle {
+  max-width: 720px;
+  margin-top: 1.4rem;
+  font-size: clamp(2.3rem, 5vw, 4.7rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.storyDescription {
+  max-width: 760px;
+  margin-top: 1.25rem;
+  color: #aaa6bb;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.75;
+}
+
+.eventGrid {
+  position: relative;
+  z-index: 2;
+  margin-top: 2rem;
+}
+
+.eventCard {
+  min-height: 240px;
+  padding: 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(0, 0, 0, 0.19);
+}
+
+.toolRow {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.storyFooter {
+  position: relative;
+  z-index: 3;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.toolCard {
+  padding: 1.4rem;
+}
+
+.toolCloud {
+  margin-top: 1rem;
+}
+
+.mobileRail {
+  display: none;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.mobileRail::-webkit-scrollbar {
+  display: none;
+}
+
+.mobileStep {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 54rem) {
+  .timelineGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .mobileRail {
+    display: flex;
+    gap: 0.45rem;
+  }
+
+  .storyCard {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 36rem) {
+  .storyFooter {
+    align-items: stretch;
+  }
+
+  .storyFooter > * {
+    flex: 1;
+  }
+}

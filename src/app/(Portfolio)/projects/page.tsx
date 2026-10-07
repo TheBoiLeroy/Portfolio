@@ -1,16 +1,19 @@
-"use client";
+import { Container } from "@mantine/core";
 import ProjectShowcase from "../components/ProjectShowcase";
-import { projects } from "../data/projects";
+import { projects, truenasProjects } from "../data/projects";
+import styles from "./projects-page.module.css";
 
 export default function ProjectsPage() {
-
   return (
-    <main className="px-6 py-20 max-w-5xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8">Projects</h1>
-
-      {projects.map((project) => (
-        <ProjectShowcase key={project.title} {...project} />
-      ))}
+    <main className={styles.page}>
+      <div className={styles.texture} aria-hidden="true" />
+      <Container size="xl" className={styles.content}>
+        <section className={styles.projectStack} aria-label="Selected projects">
+          {[...projects, ...truenasProjects].map((project) => (
+            <ProjectShowcase key={project.title} {...project} />
+          ))}
+        </section>
+      </Container>
     </main>
   );
 }
